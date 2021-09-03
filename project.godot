@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="Test2D"
+run/main_scene="res://test.tscn"
 config/icon="res://icon.png"
 
 [physics]
@@ -20,6 +21,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/driver_name="GLES2"
+2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"
