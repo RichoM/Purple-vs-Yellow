@@ -12,7 +12,7 @@ radius = 25.6595
 shader = ExtResource( 6 )
 shader_param/Shift_Hue = -0.428
 
-[node name="Node2D" type="Node2D"]
+[node name="game" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="camera" type="Camera2D" parent="."]
@@ -115,14 +115,17 @@ texture = ExtResource( 1 )
 [node name="shape" type="CollisionShape2D" parent="planet6"]
 shape = SubResource( 1 )
 
-[node name="player" parent="." instance=ExtResource( 2 )]
+[node name="player0" parent="." instance=ExtResource( 2 )]
 position = Vector2( -413.056, 12.383 )
 
-[node name="player2" parent="." instance=ExtResource( 2 )]
+[node name="player1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 398.351, -34.6109 )
 player = "p1"
 
-[node name="sprite" parent="player2" index="0"]
+[node name="sprite" parent="player1" index="0"]
 material = SubResource( 2 )
 
-[editable path="player2"]
+[connection signal="tree_exited" from="player0" to="." method="_on_player0_tree_exited"]
+[connection signal="tree_exited" from="player1" to="." method="_on_player1_tree_exited"]
+
+[editable path="player1"]
