@@ -4,7 +4,7 @@ onready var sprite = $sprite
 onready var planet_range = $range
 onready var rocket_launcher = $rocket_launcher as RocketLauncher
 
-export var planet_path : NodePath
+export var player = "p0"
 
 var planet
 
@@ -16,10 +16,6 @@ var max_speed = 200
 var aiming = false
 
 var switching_planets = false
-
-func _ready():
-	#planet = get_node(planet_path)
-	pass
 
 func _process(delta):
 	find_planet()
@@ -43,28 +39,28 @@ func apply_gravity(delta):
 	
 func apply_input(delta):
 	if aiming:
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed(player + "_right"):
 			face_right()
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed(player + "_left"):
 			face_left()
 			
 	if not aiming:
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed(player + "_up"):
 			if grounded:
 				vel.y = -300
 			elif not switching_planets:
 				vel.y -= 2000 * delta
 			
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed(player + "_right"):
 			vel.x += 175
 			face_right()
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed(player + "_left"):
 			vel.x -= 175
 			face_left()
 		else:
 			vel.x *= 0.75
 		
-	if grounded and Input.is_action_just_pressed("ui_accept"):
+	if grounded and Input.is_action_just_pressed(player + "_action"):
 		if not aiming: 
 			rocket_launcher.aim()
 			vel.x = 0
