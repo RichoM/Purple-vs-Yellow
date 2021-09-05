@@ -7,7 +7,7 @@
 [ext_resource path="res://rocket_launcher.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 129.788
+radius = 25.6595
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -52,16 +52,102 @@ height = 12.9492
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2( 0, -88.867 )
 current = true
-zoom = Vector2( 0.75, 0.75 )
+zoom = Vector2( 1.5, 1.5 )
 
 [node name="planet" type="StaticBody2D" parent="."]
 position = Vector2( 0.197052, -62.1491 )
+scale = Vector2( 4.2, 4.2 )
 
 [node name="sprite" type="Sprite" parent="planet"]
-scale = Vector2( 0.505271, 0.505271 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 
 [node name="shape" type="CollisionShape2D" parent="planet"]
+shape = SubResource( 1 )
+
+[node name="planet2" type="StaticBody2D" parent="."]
+position = Vector2( 251.147, -148.914 )
+scale = Vector2( 2, 2 )
+
+[node name="sprite" type="Sprite" parent="planet2"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet2"]
+shape = SubResource( 1 )
+
+[node name="planet3" type="StaticBody2D" parent="."]
+position = Vector2( -244.981, -244.323 )
+
+[node name="sprite" type="Sprite" parent="planet3"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet3"]
+shape = SubResource( 1 )
+
+[node name="planet4" type="StaticBody2D" parent="."]
+position = Vector2( -406.053, 208.684 )
+scale = Vector2( 4.2, 4.2 )
+
+[node name="sprite" type="Sprite" parent="planet4"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet4"]
+shape = SubResource( 1 )
+
+[node name="planet5" type="StaticBody2D" parent="."]
+position = Vector2( -155.103, 121.92 )
+scale = Vector2( 2, 2 )
+
+[node name="sprite" type="Sprite" parent="planet5"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet5"]
+shape = SubResource( 1 )
+
+[node name="planet7" type="StaticBody2D" parent="."]
+position = Vector2( 558.609, -306.686 )
+
+[node name="sprite" type="Sprite" parent="planet7"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet7"]
+shape = SubResource( 1 )
+
+[node name="planet8" type="StaticBody2D" parent="."]
+position = Vector2( 397.538, 146.321 )
+scale = Vector2( 4.2, 4.2 )
+
+[node name="sprite" type="Sprite" parent="planet8"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet8"]
+shape = SubResource( 1 )
+
+[node name="planet9" type="StaticBody2D" parent="."]
+position = Vector2( 648.488, 59.5566 )
+scale = Vector2( 2, 2 )
+
+[node name="sprite" type="Sprite" parent="planet9"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet9"]
+shape = SubResource( 1 )
+
+[node name="planet6" type="StaticBody2D" parent="."]
+position = Vector2( -651.231, 26.5103 )
+
+[node name="sprite" type="Sprite" parent="planet6"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="planet6"]
 shape = SubResource( 1 )
 
 [node name="player" type="KinematicBody2D" parent="."]
@@ -112,6 +198,7 @@ default_color = Color( 1, 0, 0, 1 )
 
 [node name="rocket_launcher" type="Node2D" parent="player"]
 script = ExtResource( 5 )
+rocket_speed = 500
 
 [node name="line" type="Line2D" parent="player/rocket_launcher"]
 position = Vector2( 15, 0 )

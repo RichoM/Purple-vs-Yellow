@@ -1,6 +1,8 @@
 extends Node2D
 class_name RocketLauncher
 
+export var rocket_speed = 250
+
 var speed = -1.5
 var facing_right = true
 var aim_limit = PI/3
@@ -29,6 +31,6 @@ func shoot():
 	print(get_global_transform().get_rotation())
 	var new_rocket = rocket.instance() as Projectile
 	new_rocket.global_transform.origin = global_transform.origin
-	new_rocket.velocity = Vector2.ONE.rotated(get_global_transform().get_rotation() - PI/4) * 200
+	new_rocket.velocity = Vector2.ONE.rotated(get_global_transform().get_rotation() - PI/4) * rocket_speed
 	get_tree().get_root().add_child(new_rocket)
 	visible = false
