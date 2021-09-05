@@ -29,6 +29,12 @@ func apply_gravity(delta):
 		vel.y += 20
 	
 func apply_input(delta):
+	if aiming:
+		if Input.is_action_pressed("ui_right"):
+			face_right()
+		elif Input.is_action_pressed("ui_left"):
+			face_left()
+			
 	if not aiming:
 		if grounded and Input.is_action_just_pressed("ui_up"):
 			vel.y = -300
