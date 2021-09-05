@@ -15,6 +15,8 @@ var max_speed = 200
 
 var aiming = false
 
+var switching_planets = false
+
 func _ready():
 	#planet = get_node(planet_path)
 	pass
@@ -29,7 +31,10 @@ func _process(delta):
 	
 func find_planet():
 	for body in planet_range.get_overlapping_bodies():
+		if body == planet: continue
 		if planet == null or position.distance_to(body.position) < position.distance_to(planet.position) - 50:
+			vel = Vector2.ZERO # TODO(Richo): Keep velocity but transformed to the new planet coordinate system
+			switching_planets = true
 			planet = body
 	
 func apply_gravity(delta):
@@ -47,7 +52,7 @@ func apply_input(delta):
 		if Input.is_action_pressed("ui_up"):
 			if grounded:
 				vel.y = -300
-			else:
+			elif not switching_planets:
 				vel.y -= 2000 * delta
 			
 		if Input.is_action_pressed("ui_right"):
@@ -105,3 +110,4 @@ func _physics_process(delta):
 	for i in get_slide_count():
 		if get_slide_collision(i).collider == planet:
 			grounded = true
+			switching_planets = false
