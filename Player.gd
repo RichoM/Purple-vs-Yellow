@@ -1,44 +1,69 @@
 extends KinematicBody2D
 
-var velocity = Vector2()
-var on_floor = false
+onready var sprite = $sprite
 
-onready var sprite = $PlayerSprite
+export var planet_path : NodePath
+
+var planet
+
+var up = Vector2.UP
+var vel = Vector2()
+var grounded = false
+var max_speed = 300
+
+func _ready():
+	planet = get_node(planet_path)
 
 func _process(delta):
-	handleInput()
-	addGravity()
-
-func handleInput():
-	if Input.is_action_pressed("ui_left"):
-		velocity.x = -50
-		sprite.flip_h = true
-	elif Input.is_action_pressed("ui_right"):
-		velocity.x = 50
+	update_up()
+	apply_gravity(delta)
+	apply_input(delta)
+	update_sprite()
+	update_gui()
+	
+func apply_gravity(delta):
+	if not grounded:
+		vel.y += 20
+	
+func apply_input(delta):
+	if grounded and Input.is_action_just_pressed("ui_up"):
+		vel.y = -300
+		
+	if Input.is_action_pressed("ui_right"):
+		vel.x += 175
 		sprite.flip_h = false
+	elif Input.is_action_pressed("ui_left"):
+		vel.x -= 175
+		sprite.flip_h = true
 	else:
-		velocity.x = 0
-		
-	if on_floor and Input.is_action_just_pressed("ui_up"):
-		velocity.y = -100
-		
-func addGravity():
-	if velocity.y > 0:
-		velocity += Vector2.DOWN * 3
-	else:
-		velocity += Vector2.DOWN * 5
-		
-func applyAnimation():
-	if on_floor:
-		if abs(velocity.x) > 1:
+		vel.x *= 0.75
+	vel.x = clamp(vel.x, -max_speed, max_speed)
+	
+func update_gui():
+	$ground_label.text = str(grounded)
+	$vel_label.text = str(vel)
+	$up_line.points[1] = up.rotated(-rotation) * 100
+
+func update_up():
+	var dir : Vector2 = position - planet.position
+	up = dir.normalized()
+	
+func update_sprite():
+	rotation = up.angle() + PI/2
+	if grounded:
+		if abs(vel.x) > 100:
 			sprite.play("walk")
 		else:
 			sprite.play("idle")
 	else:
 		sprite.play("jump")
-
+		
 func _physics_process(delta):
-	move_and_slide(velocity, Vector2.UP, true)
-	on_floor = is_on_floor()
-	applyAnimation()
-
+	var actual_vel = vel.rotated(up.angle() + PI/2)
+	$vel_line.points[1] = actual_vel.rotated(-rotation) / 3
+	move_and_slide(actual_vel, up, true)
+	grounded = false
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider == planet:
+			grounded = true

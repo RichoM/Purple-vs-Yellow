@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://pixel-line-platformer/Tilemap/tilemap_packed.png" type="Texture" id=1]
-[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://Player_old.gd" type="Script" id=2]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 octaves = 5

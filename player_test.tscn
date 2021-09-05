@@ -1,22 +1,23 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://circle.png" type="Texture" id=1]
 [ext_resource path="res://pixel-line-platformer/Tilemap/tilemap_packed.png" type="Texture" id=2]
+[ext_resource path="res://player.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 129.677
+radius = 129.788
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 64, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 64, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 16, 64, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -29,7 +30,7 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 4 ), SubResource( 3 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
@@ -41,13 +42,18 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=7]
-radius = 4.36138
-height = 5.65925
+radius = 8.12926
+height = 12.9492
 
 [node name="Node2D" type="Node2D"]
 
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2( 0, -88.867 )
+current = true
+zoom = Vector2( 0.75, 0.75 )
+
 [node name="planet" type="StaticBody2D" parent="."]
-position = Vector2( -0.746796, 76.6004 )
+position = Vector2( 0.197052, -62.1491 )
 
 [node name="sprite" type="Sprite" parent="planet"]
 scale = Vector2( 0.505271, 0.505271 )
@@ -57,16 +63,47 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="player" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -88.867 )
+position = Vector2( 0.943848, -227.617 )
+script = ExtResource( 3 )
+planet_path = NodePath("../planet")
 
 [node name="sprite" type="AnimatedSprite" parent="player"]
+rotation = -6.28319
+scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
-animation = "idle"
+animation = "walk"
+speed_scale = 1.5
+playing = true
 
 [node name="shape" type="CollisionShape2D" parent="player"]
-position = Vector2( 7.62939e-06, 0.927032 )
+position = Vector2( -0.0883827, 1.98769 )
 shape = SubResource( 7 )
 
-[node name="camera" type="Camera2D" parent="player"]
-current = true
-zoom = Vector2( 0.5, 0.5 )
+[node name="ground_label" type="Label" parent="player"]
+margin_left = 12.9968
+margin_top = -13.6913
+margin_right = 52.9968
+margin_bottom = 0.308655
+text = "Richo!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vel_label" type="Label" parent="player"]
+margin_left = 13.3937
+margin_top = -0.297638
+margin_right = 53.3937
+margin_bottom = 13.7024
+text = "Richo!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="up_line" type="Line2D" parent="player"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 2.0
+
+[node name="vel_line" type="Line2D" parent="player"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 2.0
+default_color = Color( 1, 0, 0, 1 )
