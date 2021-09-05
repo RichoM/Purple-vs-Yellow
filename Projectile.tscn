@@ -4,7 +4,7 @@
 [ext_resource path="res://Projectile.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 282.319
+radius = 487.0
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource( 2 )
@@ -22,5 +22,5 @@ default_color = Color( 0.4, 0.501961, 1, 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="range"]
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="range" to="." method="_on_range_area_entered"]
-[connection signal="area_exited" from="range" to="." method="_on_range_area_exited"]
+[connection signal="body_entered" from="range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="range" to="." method="_on_range_body_exited"]
