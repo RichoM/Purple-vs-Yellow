@@ -26,7 +26,7 @@ func _process(delta):
 	
 func apply_gravity(delta):
 	if not grounded:
-		vel.y += 20
+		vel.y += 1500 * delta
 	
 func apply_input(delta):
 	if aiming:
@@ -36,8 +36,11 @@ func apply_input(delta):
 			face_left()
 			
 	if not aiming:
-		if grounded and Input.is_action_just_pressed("ui_up"):
-			vel.y = -300
+		if Input.is_action_pressed("ui_up"):
+			if grounded:
+				vel.y = -300
+			else:
+				vel.y -= 2000 * delta
 			
 		if Input.is_action_pressed("ui_right"):
 			vel.x += 175
@@ -57,6 +60,7 @@ func apply_input(delta):
 		aiming = !aiming
 		
 	vel.x = clamp(vel.x, -max_speed, max_speed)
+	vel.y = clamp(vel.y, -300, 300)
 	
 func face_right():
 	sprite.flip_h = false
