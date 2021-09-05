@@ -9,7 +9,7 @@ var planet
 var up = Vector2.UP
 var vel = Vector2()
 var grounded = false
-var max_speed = 300
+var max_speed = 200
 
 func _ready():
 	planet = get_node(planet_path)
@@ -64,6 +64,5 @@ func _physics_process(delta):
 	move_and_slide(actual_vel, up, true)
 	grounded = false
 	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if collision.collider == planet:
+		if get_slide_collision(i).collider == planet:
 			grounded = true
