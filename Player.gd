@@ -29,7 +29,9 @@ func find_planet():
 	for body in planet_range.get_overlapping_bodies():
 		if body == planet: continue
 		if planet == null or position.distance_to(body.position) < position.distance_to(planet.position) - 50:
-			vel = Vector2.ZERO # TODO(Richo): Keep velocity but transformed to the new planet coordinate system
+			# TODO(Richo): Keep velocity but transformed to the new planet coordinate system?
+			var angle = up.rotated(PI).angle_to(body.position)
+			vel = vel.rotated(angle)
 			switching_planets = true
 			planet = body
 	
