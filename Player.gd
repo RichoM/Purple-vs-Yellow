@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var sprite = $sprite
+onready var planet_range = $range
 onready var rocket_launcher = $rocket_launcher as RocketLauncher
 
 export var planet_path : NodePath
@@ -15,14 +16,21 @@ var max_speed = 200
 var aiming = false
 
 func _ready():
-	planet = get_node(planet_path)
+	#planet = get_node(planet_path)
+	pass
 
 func _process(delta):
+	find_planet()
 	update_up()
 	apply_gravity(delta)
 	apply_input(delta)
 	update_sprite()
 	update_gui()
+	
+func find_planet():
+	for body in planet_range.get_overlapping_bodies():
+		if planet == null or position.distance_to(body.position) < position.distance_to(planet.position) - 50:
+			planet = body
 	
 func apply_gravity(delta):
 	if not grounded:
