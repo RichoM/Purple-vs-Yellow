@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "Attractor",
 "language": "GDScript",
 "path": "res://Attractor.gd"
+}, {
+"base": "Node2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Projectile.gd"
+}, {
+"base": "Node2D",
+"class": "RocketLauncher",
+"language": "GDScript",
+"path": "res://rocket_launcher.gd"
 } ]
 _global_script_class_icons={
-"Attractor": ""
+"Attractor": "",
+"Projectile": "",
+"RocketLauncher": ""
 }
 
 [application]

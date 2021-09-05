@@ -1,6 +1,6 @@
 extends Node2D
+class_name Projectile
 
-var initial_velocity = Vector2.RIGHT * 100
 var velocity = Vector2()
 
 onready var line = $Line2D
