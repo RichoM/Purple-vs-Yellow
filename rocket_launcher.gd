@@ -3,9 +3,9 @@ class_name RocketLauncher
 
 export var rocket_speed = 250
 
-var speed = -1.5
+var speed = -1.75
 var facing_right = true
-var aim_limit = PI/3
+var aim_limit = PI/2
 
 var rocket = preload("res://Projectile.tscn")
 
@@ -33,5 +33,5 @@ func shoot():
 	get_tree().get_root().add_child(new_rocket)
 	new_rocket.global_transform.origin = global_transform.origin
 	new_rocket.velocity = Vector2.ONE.rotated(get_global_transform().get_rotation() - PI/4) * rocket_speed
-	new_rocket.position += new_rocket.velocity * 0.016 * 2 # Advance a couple of frames to avoid colliding with player
+	new_rocket.position += new_rocket.velocity * 0.016 * 4 # Advance a couple of frames to avoid colliding with player
 	visible = false

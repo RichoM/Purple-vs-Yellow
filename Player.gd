@@ -85,8 +85,9 @@ func update_gui():
 	$up_line.points[1] = up.rotated(-rotation) * 100
 
 func update_up():
-	var dir : Vector2 = position - planet.position
-	up = dir.normalized()
+	if planet:
+		var dir : Vector2 = position - planet.position
+		up = dir.normalized()
 	
 func update_sprite():
 	rotation = up.angle() + PI/2

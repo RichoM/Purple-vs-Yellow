@@ -6,7 +6,7 @@
 [ext_resource path="res://rocket_launcher.gd" type="Script" id=4]
 [ext_resource path="res://hue.gdshader" type="Shader" id=5]
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
 shader_param/Shift_Hue = -0.602
 
@@ -55,10 +55,9 @@ radius = 152.117
 position = Vector2( 0.943848, -227.617 )
 collision_layer = 2
 script = ExtResource( 3 )
-planet_path = NodePath("../planet")
 
 [node name="sprite" type="AnimatedSprite" parent="."]
-material = SubResource( 10 )
+material = SubResource( 1 )
 rotation = -6.28319
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
@@ -106,7 +105,7 @@ default_color = Color( 1, 0, 0, 1 )
 
 [node name="rocket_launcher" type="Node2D" parent="."]
 script = ExtResource( 4 )
-rocket_speed = 500
+rocket_speed = 400
 
 [node name="line" type="Line2D" parent="rocket_launcher"]
 position = Vector2( 15, 0 )
