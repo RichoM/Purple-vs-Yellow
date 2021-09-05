@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
-"class": "Attractor",
-"language": "GDScript",
-"path": "res://Attractor.gd"
-}, {
 "base": "Node2D",
 "class": "Projectile",
 "language": "GDScript",
@@ -25,7 +20,6 @@ _global_script_classes=[ {
 "path": "res://rocket_launcher.gd"
 } ]
 _global_script_class_icons={
-"Attractor": "",
 "Projectile": "",
 "RocketLauncher": ""
 }
