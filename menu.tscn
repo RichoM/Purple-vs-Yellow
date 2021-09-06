@@ -58,16 +58,15 @@ shader_param/Shift_Sat = null
 shader_param/Shift_Val = null
 
 [sub_resource type="DynamicFont" id=6]
-size = 22
-outline_size = 2
+size = 18
+outline_size = 1
 outline_color = Color( 0, 0.533333, 0.87451, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 20
-outline_size = 2
-outline_color = Color( 0, 0.533333, 0.87451, 1 )
-font_data = ExtResource( 4 )
+size = 24
+outline_size = 1
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 17
