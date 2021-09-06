@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://explosion.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "default",
+"speed": 30.0
+} ]
+
+[sub_resource type="GDScript" id=14]
+script/source = "extends AnimatedSprite
+
+func _process(delta):
+	rotate(delta * 15)
+
+
+func _on_Button_pressed():
+	self.visible = true
+	self.frame = 0
+	self.play()
+
+
+func _on_AnimatedSprite_animation_finished():
+	self.visible = false
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="explosion" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 502.467, 286.869 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 13 )
+frame = 2
+script = SubResource( 14 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 204.907, 112.253 )
+scale = Vector2( 2.04, 2.04 )
+
+[node name="Button" type="Button" parent="Node2D"]
+margin_left = 2.37573
+margin_top = 2.8299
+margin_right = 39.3757
+margin_bottom = 22.8299
+text = "GO!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="animation_finished" from="explosion" to="explosion" method="_on_AnimatedSprite_animation_finished"]
+[connection signal="pressed" from="Node2D/Button" to="explosion" method="_on_Button_pressed"]

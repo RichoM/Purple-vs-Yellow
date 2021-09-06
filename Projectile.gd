@@ -40,13 +40,15 @@ func explode():
 	get_parent().remove_child(self)
 	
 func show_damage():    
-	var line = explosion_range.get_node("line")
-	if line:
-		var origin = line.global_transform.origin
-		line.get_parent().remove_child(line)
-		get_tree().get_root().add_child(line)
-		line.visible = true
-		line.global_transform.origin = origin
-		line.get_node("sfx").play()
+	var explosion = explosion_range.get_node("explosion")
+	if explosion:
+		var origin = explosion.global_transform.origin
+		explosion.get_parent().remove_child(explosion)
+		get_tree().get_root().add_child(explosion)
+		explosion.visible = true
+		explosion.global_transform.origin = origin
+		explosion.get_node("sfx").play()
+		var sprite = explosion.get_node("sprite")
+		sprite.play(sprite.animation)
 		yield(get_tree().create_timer(1.0), "timeout")
-		line.get_parent().remove_child(line)
+		explosion.get_parent().remove_child(explosion)
