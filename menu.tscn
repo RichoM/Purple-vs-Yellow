@@ -64,11 +64,11 @@ animations = [ {
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 6 )
 
-[sub_resource type="InputEventAction" id=12]
+[sub_resource type="InputEventAction" id=14]
 action = "ui_accept"
 
 [sub_resource type="ShortCut" id=13]
-shortcut = SubResource( 12 )
+shortcut = SubResource( 14 )
 
 [node name="menu" type="Node2D"]
 position = Vector2( 1000, 1000 )
