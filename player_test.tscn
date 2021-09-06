@@ -162,7 +162,7 @@ player = "p1"
 [node name="sprite" parent="player1" index="0"]
 material = SubResource( 12 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -5.0
 autoplay = true
