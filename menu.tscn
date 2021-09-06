@@ -253,7 +253,7 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="s"]
 points = PoolVector2Array( -0.80127, 18.5166, -0.80127, 28.6304 )
 width = 2.0
-default_color = Color( 0, 0, 0, 1 )
+default_color = Color( 1, 1, 1, 1 )
 
 [node name="up" type="AnimatedSprite" parent="."]
 position = Vector2( 50.2908, 27.6248 )
@@ -334,7 +334,7 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="down"]
 points = PoolVector2Array( -0.80127, 18.5166, -0.80127, 28.6304 )
 width = 2.0
-default_color = Color( 0, 0, 0, 1 )
+default_color = Color( 1, 1, 1, 1 )
 
 [node name="press_enter" type="Node2D" parent="."]
 position = Vector2( 0.297302, 5.47046 )
