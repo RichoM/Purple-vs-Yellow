@@ -112,6 +112,12 @@ default_color = Color( 1, 0.180392, 0.180392, 1 )
 texture = ExtResource( 2 )
 texture_mode = 1
 
+[node name="arrow" type="Line2D" parent="rocket_launcher/line"]
+position = Vector2( -12.4108, 0 )
+points = PoolVector2Array( 57.4033, 6.0759, 64.6871, 0.116409, 57.5357, -6.24037 )
+width = 2.0
+default_color = Color( 1, 0, 0, 1 )
+
 [node name="sfx" type="AudioStreamPlayer" parent="rocket_launcher"]
 stream = ExtResource( 6 )
 
