@@ -46,5 +46,6 @@ func show_damage():
 	get_tree().get_root().add_child(line)
 	line.visible = true
 	line.global_transform.origin = origin
+	line.get_node("sfx").play()
 	yield(get_tree().create_timer(1.0), "timeout")
 	line.get_parent().remove_child(line)

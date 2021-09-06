@@ -35,3 +35,4 @@ func shoot():
 	new_rocket.velocity = Vector2.ONE.rotated(get_global_transform().get_rotation() - PI/4) * rocket_speed
 	new_rocket.position += new_rocket.velocity * 0.016 * 4 # Advance a couple of frames to avoid colliding with player
 	visible = false
+	$sfx.play()
