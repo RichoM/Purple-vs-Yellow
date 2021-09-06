@@ -13,7 +13,7 @@ func _ready():
 	map["p1_action"] = $down
 	
 func _on_play_button_pressed():
-	get_tree().change_scene("res://player_test.tscn")
+	get_tree().change_scene("res://game.tscn")
 
 func _process(_delta):
 	for key in map.keys():

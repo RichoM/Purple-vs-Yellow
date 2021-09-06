@@ -1,7 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://pixel-line-platformer/Tilemap/tilemap_packed.png" type="Texture" id=1]
-[ext_resource path="res://tile.png" type="Texture" id=2]
 [ext_resource path="res://player.gd" type="Script" id=3]
 [ext_resource path="res://rocket_launcher.gd" type="Script" id=4]
 [ext_resource path="res://player.tres" type="Material" id=5]
@@ -45,6 +44,10 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 8.12926
 height = 12.9492
+
+[sub_resource type="StreamTexture" id=8]
+flags = 6
+load_path = "res://.import/tile.png-b6edd167b3cc7ec58612b18f9a6dce92.stex"
 
 [sub_resource type="CircleShape2D" id=7]
 radius = 74.1103
@@ -110,7 +113,7 @@ position = Vector2( 15, 0 )
 points = PoolVector2Array( 0, 0, 50, 0 )
 width = 2.5
 default_color = Color( 1, 0.180392, 0.180392, 1 )
-texture = ExtResource( 2 )
+texture = SubResource( 8 )
 texture_mode = 1
 
 [node name="arrow" type="Line2D" parent="rocket_launcher/line"]

@@ -9,15 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Missile",
+"language": "GDScript",
+"path": "res://missile.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://player.gd"
-}, {
-"base": "Node2D",
-"class": "Projectile",
-"language": "GDScript",
-"path": "res://Projectile.gd"
 }, {
 "base": "Node2D",
 "class": "RocketLauncher",
@@ -25,8 +25,8 @@ _global_script_classes=[ {
 "path": "res://rocket_launcher.gd"
 } ]
 _global_script_class_icons={
+"Missile": "",
 "Player": "",
-"Projectile": "",
 "RocketLauncher": ""
 }
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://bullet.png" type="Texture" id=1]
-[ext_resource path="res://Projectile.gd" type="Script" id=2]
-[ext_resource path="res://sfx/explosions/explodemini.wav" type="AudioStream" id=3]
-[ext_resource path="res://explosion.gd" type="Script" id=4]
+[ext_resource path="res://explosion.gd" type="Script" id=2]
+[ext_resource path="res://missile.gd" type="Script" id=3]
+[ext_resource path="res://sfx/explosions/explodemini.wav" type="AudioStream" id=4]
 [ext_resource path="res://explosion.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -62,7 +62,7 @@ animations = [ {
 _data = [ Vector2( 0, 1 ), 0.0, -0.255595, 0, 0, Vector2( 1, 0 ), -1.55061, 0.0, 0, 0 ]
 
 [node name="Projectile" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="sprite" type="Sprite" parent="."]
 modulate = Color( 1, 0.352941, 0, 1 )
@@ -99,12 +99,12 @@ shape = SubResource( 3 )
 visible = false
 
 [node name="sfx" type="AudioStreamPlayer" parent="explosion_range/explosion"]
-stream = ExtResource( 3 )
+stream = ExtResource( 4 )
 
 [node name="sprite" type="AnimatedSprite" parent="explosion_range/explosion"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 13 )
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="trail" type="CPUParticles2D" parent="."]
 modulate = Color( 1, 0.32549, 0.137255, 1 )

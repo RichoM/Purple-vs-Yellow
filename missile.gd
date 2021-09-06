@@ -1,5 +1,5 @@
 extends Node2D
-class_name Projectile
+class_name Missile
 
 var velocity = Vector2()
 
@@ -37,7 +37,8 @@ func explode():
 	for body in explosion_range.get_overlapping_bodies():
 		body.die(position)
 	show_damage()
-	get_parent().remove_child(self)
+	var parent = get_parent()
+	if parent: parent.remove_child(self)
 	
 func show_damage():    
 	var explosion = explosion_range.get_node("explosion")
