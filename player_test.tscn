@@ -25,33 +25,35 @@ polygon = PoolVector2Array( -1584.95, -484.644, 1386.4, -484.644, 1386.4, 510.11
 current = true
 zoom = Vector2( 1.5, 1.5 )
 
-[node name="planet" type="StaticBody2D" parent="."]
+[node name="planets" type="Node2D" parent="."]
+
+[node name="planet1" type="StaticBody2D" parent="planets"]
 position = Vector2( 0.197052, -62.1491 )
 scale = Vector2( 4.2, 4.2 )
 
-[node name="sprite" type="AnimatedSprite" parent="planet"]
+[node name="sprite" type="AnimatedSprite" parent="planets/planet1"]
 scale = Vector2( 1.82, 1.82 )
 frames = ExtResource( 5 )
 
-[node name="shape" type="CollisionShape2D" parent="planet"]
+[node name="shape" type="CollisionShape2D" parent="planets/planet1"]
 shape = SubResource( 11 )
 
-[node name="planet2" type="StaticBody2D" parent="."]
+[node name="planet2" type="StaticBody2D" parent="planets"]
 position = Vector2( 259.156, -246.357 )
 scale = Vector2( 2, 2 )
 
-[node name="sprite" type="AnimatedSprite" parent="planet2"]
+[node name="sprite" type="AnimatedSprite" parent="planets/planet2"]
 scale = Vector2( 1.82, 1.82 )
 frames = ExtResource( 5 )
 frame = 1
 
-[node name="shape" type="CollisionShape2D" parent="planet2"]
+[node name="shape" type="CollisionShape2D" parent="planets/planet2"]
 shape = SubResource( 11 )
 
-[node name="planet3" type="StaticBody2D" parent="."]
+[node name="planet3" type="StaticBody2D" parent="planets"]
 position = Vector2( -369.573, -299.068 )
 
-[node name="sprite" type="AnimatedSprite" parent="planet3"]
+[node name="sprite" type="AnimatedSprite" parent="planets/planet3"]
 scale = Vector2( 1.82, 1.82 )
 frames = ExtResource( 5 )
 frame = 2
@@ -59,14 +61,14 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="shape" type="CollisionShape2D" parent="planet3"]
+[node name="shape" type="CollisionShape2D" parent="planets/planet3"]
 shape = SubResource( 11 )
 
-[node name="planet4" type="StaticBody2D" parent="."]
+[node name="planet4" type="StaticBody2D" parent="planets"]
 position = Vector2( -406.053, 208.684 )
 scale = Vector2( 4.2, 4.2 )
 
-[node name="sprite" type="AnimatedSprite" parent="planet4"]
+[node name="sprite" type="AnimatedSprite" parent="planets/planet4"]
 scale = Vector2( 1.82, 1.82 )
 frames = ExtResource( 5 )
 frame = 3
@@ -74,14 +76,14 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="shape" type="CollisionShape2D" parent="planet4"]
+[node name="shape" type="CollisionShape2D" parent="planets/planet4"]
 shape = SubResource( 11 )
 
-[node name="planet5" type="StaticBody2D" parent="."]
+[node name="planet5" type="StaticBody2D" parent="planets"]
 position = Vector2( -102.777, 215.965 )
 scale = Vector2( 2, 2 )
 
-[node name="sprite" type="AnimatedSprite" parent="planet5"]
+[node name="sprite" type="AnimatedSprite" parent="planets/planet5"]
 scale = Vector2( 1.82, 1.82 )
 frames = ExtResource( 5 )
 frame = 4
@@ -89,57 +91,13 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="shape" type="CollisionShape2D" parent="planet5"]
+[node name="shape" type="CollisionShape2D" parent="planets/planet5"]
 shape = SubResource( 11 )
 
-[node name="planet7" type="StaticBody2D" parent="."]
-position = Vector2( 558.609, -306.686 )
-
-[node name="sprite" type="AnimatedSprite" parent="planet7"]
-scale = Vector2( 1.82, 1.82 )
-frames = ExtResource( 5 )
-frame = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="shape" type="CollisionShape2D" parent="planet7"]
-shape = SubResource( 11 )
-
-[node name="planet8" type="StaticBody2D" parent="."]
-position = Vector2( 397.538, 146.321 )
-scale = Vector2( 4.2, 4.2 )
-
-[node name="sprite" type="AnimatedSprite" parent="planet8"]
-scale = Vector2( 1.82, 1.82 )
-frames = ExtResource( 5 )
-frame = 6
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="shape" type="CollisionShape2D" parent="planet8"]
-shape = SubResource( 11 )
-
-[node name="planet9" type="StaticBody2D" parent="."]
-position = Vector2( 648.488, 59.5566 )
-scale = Vector2( 2, 2 )
-
-[node name="sprite" type="AnimatedSprite" parent="planet9"]
-scale = Vector2( 1.82, 1.82 )
-frames = ExtResource( 5 )
-frame = 7
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="shape" type="CollisionShape2D" parent="planet9"]
-shape = SubResource( 11 )
-
-[node name="planet6" type="StaticBody2D" parent="."]
+[node name="planet6" type="StaticBody2D" parent="planets"]
 position = Vector2( -651.231, 3.51025 )
 
-[node name="sprite" type="AnimatedSprite" parent="planet6"]
+[node name="sprite" type="AnimatedSprite" parent="planets/planet6"]
 scale = Vector2( 1.82, 1.82 )
 frames = ExtResource( 5 )
 frame = 8
@@ -147,7 +105,51 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="shape" type="CollisionShape2D" parent="planet6"]
+[node name="shape" type="CollisionShape2D" parent="planets/planet6"]
+shape = SubResource( 11 )
+
+[node name="planet7" type="StaticBody2D" parent="planets"]
+position = Vector2( 558.609, -306.686 )
+
+[node name="sprite" type="AnimatedSprite" parent="planets/planet7"]
+scale = Vector2( 1.82, 1.82 )
+frames = ExtResource( 5 )
+frame = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="shape" type="CollisionShape2D" parent="planets/planet7"]
+shape = SubResource( 11 )
+
+[node name="planet8" type="StaticBody2D" parent="planets"]
+position = Vector2( 397.538, 146.321 )
+scale = Vector2( 4.2, 4.2 )
+
+[node name="sprite" type="AnimatedSprite" parent="planets/planet8"]
+scale = Vector2( 1.82, 1.82 )
+frames = ExtResource( 5 )
+frame = 6
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="shape" type="CollisionShape2D" parent="planets/planet8"]
+shape = SubResource( 11 )
+
+[node name="planet9" type="StaticBody2D" parent="planets"]
+position = Vector2( 648.488, 59.5566 )
+scale = Vector2( 2, 2 )
+
+[node name="sprite" type="AnimatedSprite" parent="planets/planet9"]
+scale = Vector2( 1.82, 1.82 )
+frames = ExtResource( 5 )
+frame = 7
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="shape" type="CollisionShape2D" parent="planets/planet9"]
 shape = SubResource( 11 )
 
 [node name="player0" parent="." instance=ExtResource( 2 )]
