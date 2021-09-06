@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://pixel-line-platformer/Tilemap/tilemap_packed.png" type="Texture" id=1]
 [ext_resource path="res://tile.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://rocket_launcher.gd" type="Script" id=4]
 [ext_resource path="res://player.tres" type="Material" id=5]
 [ext_resource path="res://sfx/launches/iceball.wav" type="AudioStream" id=6]
+[ext_resource path="res://sfx/lose/loser (4).wav" type="AudioStream" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -127,3 +128,7 @@ collision_layer = 4
 
 [node name="shape" type="CollisionShape2D" parent="range"]
 shape = SubResource( 7 )
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 15.0

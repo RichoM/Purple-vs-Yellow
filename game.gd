@@ -5,7 +5,6 @@ var game_over = false
 func _ready():
 	for planet in $planets.get_children():
 		var sprite = planet.get_node("sprite") as AnimatedSprite
-		var frame = sprite.frame
 		sprite.frame = rand_range(0, sprite.frames.get_frame_count(sprite.animation) - 1)
 		planet.scale = Vector2.ONE * rand_range(1, 4.5)
 

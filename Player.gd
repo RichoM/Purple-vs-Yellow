@@ -27,6 +27,8 @@ func _ready():
 func die():
 	dead = true
 	vel = Vector2(300 if sprite.flip_h else -300, -300)
+	$shape.disabled = true
+	$sfx.play()
 	yield(get_tree().create_timer(1), "timeout")
 	get_parent().remove_child(self)
 
