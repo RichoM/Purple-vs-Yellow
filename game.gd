@@ -20,7 +20,8 @@ func winner(winner):
 	root.remove_child(level)
 	level.call_deferred("free")
 
-	var end_scene = load("res://end.tscn").instance()
+	# Add end scene
+	var end_scene = preload("res://end.tscn").instance()
 	var p0 = end_scene.get_node("p0")
 	var p1 = end_scene.get_node("p1")
 	if winner == "p0":
