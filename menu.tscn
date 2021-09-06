@@ -7,6 +7,7 @@
 [ext_resource path="res://menu.gd" type="Script" id=5]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://keys.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://planets/planets.tres" type="SpriteFrames" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -37,13 +38,13 @@ animations = [ {
 shader = ExtResource( 3 )
 shader_param/Shift_Hue = -0.428
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 size = 22
 outline_size = 2
 outline_color = Color( 0, 0.533333, 0.87451, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 20
 outline_size = 2
 outline_color = Color( 0, 0.533333, 0.87451, 1 )
@@ -51,24 +52,18 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 17
+outline_size = 1
 font_data = ExtResource( 6 )
 
-[sub_resource type="SpriteFrames" id=10]
-animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=10]
+outline_size = 1
 font_data = ExtResource( 6 )
 
-[sub_resource type="InputEventAction" id=14]
+[sub_resource type="InputEventAction" id=11]
 action = "ui_accept"
 
-[sub_resource type="ShortCut" id=13]
-shortcut = SubResource( 14 )
+[sub_resource type="ShortCut" id=12]
+shortcut = SubResource( 11 )
 
 [node name="menu" type="Node2D"]
 position = Vector2( 1000, 1000 )
@@ -79,22 +74,23 @@ position = Vector2( 128.058, -18.3527 )
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -288.957, -54.1085, 31.7869, -55.7921, 33.6344, 84.1782, -288.211, 82.9877 )
 
-[node name="floor" type="Polygon2D" parent="."]
-position = Vector2( 128.9, -18.6333 )
-color = Color( 0.901961, 0.901961, 0.901961, 1 )
-polygon = PoolVector2Array( -287.673, 19.5, 33.371, 19.5, 33.6344, 84.1782, -288.211, 82.9877 )
+[node name="floor2" type="AnimatedSprite" parent="."]
+modulate = Color( 0.709804, 0.658824, 0.603922, 1 )
+position = Vector2( 0, 44.2078 )
+scale = Vector2( 11.591, 2.866 )
+frames = ExtResource( 8 )
 
 [node name="p0" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( -49.7027, -0.859741 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 1.6, 1.75 )
 frames = SubResource( 4 )
 animation = "alive"
 
 [node name="p1" type="AnimatedSprite" parent="."]
 material = SubResource( 5 )
 position = Vector2( 50.2974, -0.859741 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 1.6, 1.75 )
 frames = SubResource( 4 )
 animation = "alive"
 flip_h = true
@@ -110,7 +106,7 @@ margin_top = -25.1366
 margin_right = 21.143
 margin_bottom = 6.86334
 rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "vs"
 align = 1
 __meta__ = {
@@ -123,7 +119,7 @@ margin_top = -48.0525
 margin_right = -12.8945
 margin_bottom = -16.0525
 rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.709804, 0, 0.407843, 1 )
 text = "Purple"
 align = 1
@@ -137,7 +133,7 @@ margin_top = -47.3583
 margin_right = 83.0181
 margin_bottom = -15.3583
 rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 0.713726, 0, 1 )
 text = "Yellow"
 align = 1
@@ -146,7 +142,7 @@ __meta__ = {
 }
 
 [node name="w" type="AnimatedSprite" parent="."]
-position = Vector2( -49.6799, 35.8655 )
+position = Vector2( -49.3054, 27.6248 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -164,7 +160,7 @@ __meta__ = {
 }
 
 [node name="a" type="AnimatedSprite" parent="."]
-position = Vector2( -58.6091, 44.0659 )
+position = Vector2( -58.2346, 35.8252 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -183,7 +179,7 @@ __meta__ = {
 }
 
 [node name="d" type="AnimatedSprite" parent="."]
-position = Vector2( -41.0483, 44.2388 )
+position = Vector2( -40.6738, 35.998 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -202,7 +198,7 @@ __meta__ = {
 }
 
 [node name="s" type="AnimatedSprite" parent="."]
-position = Vector2( -49.6687, 44.155 )
+position = Vector2( -49.2942, 35.9143 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -226,7 +222,7 @@ width = 2.0
 default_color = Color( 0, 0, 0, 1 )
 
 [node name="up" type="AnimatedSprite" parent="."]
-position = Vector2( 49.9163, 35.8655 )
+position = Vector2( 50.2908, 27.6248 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -245,7 +241,7 @@ __meta__ = {
 }
 
 [node name="left" type="AnimatedSprite" parent="."]
-position = Vector2( 40.9871, 44.0659 )
+position = Vector2( 41.3616, 35.8252 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -264,7 +260,7 @@ __meta__ = {
 }
 
 [node name="right" type="AnimatedSprite" parent="."]
-position = Vector2( 58.5479, 44.2388 )
+position = Vector2( 58.9224, 35.998 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -283,7 +279,7 @@ __meta__ = {
 }
 
 [node name="down" type="AnimatedSprite" parent="."]
-position = Vector2( 49.9275, 44.155 )
+position = Vector2( 50.302, 35.9143 )
 scale = Vector2( 0.25, 0.25 )
 frames = ExtResource( 7 )
 animation = "released"
@@ -306,28 +302,24 @@ points = PoolVector2Array( -0.80127, 18.5166, -0.80127, 28.6304 )
 width = 2.0
 default_color = Color( 0, 0, 0, 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0.297302, 3.86493 )
-frames = SubResource( 10 )
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2( 0.297302, 17.5369 )
+[node name="press_enter" type="Node2D" parent="."]
+position = Vector2( 0.297302, 5.47046 )
 scale = Vector2( 0.55, 0.55 )
 
-[node name="play_button" type="Button" parent="Node2D"]
+[node name="play_button" type="Button" parent="press_enter"]
 margin_left = -47.7996
 margin_top = 11.1782
 margin_right = 52.2004
 margin_bottom = 33.1782
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
 custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
-shortcut = SubResource( 13 )
+shortcut = SubResource( 12 )
 text = "PRESS ENTER"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Node2D/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="press_enter/play_button" to="." method="_on_play_button_pressed"]
