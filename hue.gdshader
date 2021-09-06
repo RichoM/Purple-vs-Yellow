@@ -2,6 +2,8 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform float Shift_Hue;
+uniform float Shift_Sat;
+uniform float Shift_Val;
 
 void fragment() {
 // Input:3
@@ -22,6 +24,8 @@ void fragment() {
 	}
 
 	color_hsv.x = mod((color_hsv.x + Shift_Hue), 1.0f);
+	color_hsv.y = mod((color_hsv.y + Shift_Sat), 1.0f);
+	color_hsv.z = mod((color_hsv.z + Shift_Val), 1.0f);
 
 // VectorFunc:5
 	vec3 color_rgb;

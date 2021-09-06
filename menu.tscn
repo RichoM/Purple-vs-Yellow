@@ -12,6 +12,8 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/Shift_Hue = -0.602
+shader_param/Shift_Sat = 0.0
+shader_param/Shift_Val = 0.0
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -37,6 +39,8 @@ animations = [ {
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )
 shader_param/Shift_Hue = -0.428
+shader_param/Shift_Sat = null
+shader_param/Shift_Val = null
 
 [sub_resource type="DynamicFont" id=6]
 size = 22
@@ -76,8 +80,8 @@ polygon = PoolVector2Array( -288.957, -54.1085, 31.7869, -55.7921, 33.6344, 84.1
 
 [node name="floor2" type="AnimatedSprite" parent="."]
 modulate = Color( 0.709804, 0.658824, 0.603922, 1 )
-position = Vector2( 0, 44.2078 )
-scale = Vector2( 11.591, 2.866 )
+position = Vector2( 2.88847, 80.2485 )
+scale = Vector2( 41.1912, 5.11854 )
 frames = ExtResource( 8 )
 
 [node name="p0" type="AnimatedSprite" parent="."]

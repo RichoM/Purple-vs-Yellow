@@ -5,3 +5,5 @@
 [resource]
 shader = ExtResource( 1 )
 shader_param/Shift_Hue = -0.602
+shader_param/Shift_Sat = null
+shader_param/Shift_Val = null
