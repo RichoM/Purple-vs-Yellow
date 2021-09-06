@@ -9,7 +9,7 @@ export var player = "p0"
 var planet
 
 var up = Vector2.UP
-var vel = Vector2.DOWN * 100
+var vel = Vector2.DOWN * 300
 var grounded = false
 var max_speed = 200
 
