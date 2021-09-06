@@ -35,7 +35,7 @@ func _on_collision_range_body_entered(body):
 	
 func explode():
 	for body in explosion_range.get_overlapping_bodies():
-		body.die()
+		body.die(position)
 	show_damage()
 	get_parent().remove_child(self)
 	

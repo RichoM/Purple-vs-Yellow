@@ -24,9 +24,9 @@ func _ready():
 	else:
 		face_right()
 
-func die():
+func die(pos: Vector2):
 	dead = true
-	vel = Vector2(300 if sprite.flip_h else -300, -300)
+	vel = Vector2(sign(position.x - pos.x) * 300, -300)
 	$shape.disabled = true
 	$sfx.play()
 	yield(get_tree().create_timer(1), "timeout")
