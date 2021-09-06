@@ -8,16 +8,16 @@
 [ext_resource path="res://hue.gdshader" type="Shader" id=6]
 [ext_resource path="res://space_background_pack/layers/parallax-space-stars.png" type="Texture" id=7]
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
 shader_param/Shift_Hue = -0.514
 shader_param/Shift_Sat = 0.265
 shader_param/Shift_Val = -0.038
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=2]
 radius = 25.6595
 
-[sub_resource type="ShaderMaterial" id=12]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 6 )
 shader_param/Shift_Hue = -0.428
 shader_param/Shift_Sat = null
@@ -32,13 +32,13 @@ color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -1584.95, -484.644, 1386.4, -484.644, 1386.4, 510.113, -1584.95, 510.113 )
 
 [node name="background2" type="Sprite" parent="."]
-material = SubResource( 13 )
+material = SubResource( 1 )
 position = Vector2( 17.176, -9.53328 )
 scale = Vector2( 7.06147, 6.14 )
 texture = ExtResource( 1 )
 
 [node name="background3" type="Sprite" parent="."]
-material = SubResource( 13 )
+material = SubResource( 1 )
 position = Vector2( 17.176, -9.53328 )
 scale = Vector2( 7.06147, 6.14 )
 texture = ExtResource( 7 )
@@ -60,7 +60,7 @@ scale = Vector2( 1.82, 1.82 )
 frames = ExtResource( 5 )
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet1"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet2" type="StaticBody2D" parent="planets"]
 position = Vector2( 255.38, -267.122 )
@@ -72,7 +72,7 @@ frames = ExtResource( 5 )
 frame = 1
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet2"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet3" type="StaticBody2D" parent="planets"]
 position = Vector2( -369.573, -299.068 )
@@ -86,7 +86,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet3"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet4" type="StaticBody2D" parent="planets"]
 position = Vector2( -406.053, 208.684 )
@@ -101,7 +101,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet4"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet5" type="StaticBody2D" parent="planets"]
 position = Vector2( -87.675, 244.281 )
@@ -116,7 +116,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet5"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet6" type="StaticBody2D" parent="planets"]
 position = Vector2( -651.231, 3.51025 )
@@ -130,7 +130,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet6"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet7" type="StaticBody2D" parent="planets"]
 position = Vector2( 558.609, -306.686 )
@@ -144,7 +144,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet7"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet8" type="StaticBody2D" parent="planets"]
 position = Vector2( 369.222, 263.361 )
@@ -159,7 +159,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet8"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="planet9" type="StaticBody2D" parent="planets"]
 position = Vector2( 648.488, 59.5566 )
@@ -174,7 +174,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="planets/planet9"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="player0" parent="." instance=ExtResource( 2 )]
 position = Vector2( -413.056, 0 )
@@ -186,7 +186,7 @@ scale = Vector2( 1.35, 1.5 )
 player = "p1"
 
 [node name="sprite" parent="player1" index="0"]
-material = SubResource( 12 )
+material = SubResource( 3 )
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

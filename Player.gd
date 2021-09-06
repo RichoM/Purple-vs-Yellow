@@ -18,6 +18,12 @@ var aiming = false
 var switching_planets = false
 var dead = false
 
+func _ready():
+	if position.x > 0:
+		face_left()
+	else:
+		face_right()
+
 func die():
 	dead = true
 	vel = Vector2(300 if sprite.flip_h else -300, -300)
