@@ -9,7 +9,7 @@ export var player = "p0"
 var planet
 
 var up = Vector2.UP
-var vel = Vector2()
+var vel = Vector2.DOWN * 100
 var grounded = false
 var max_speed = 200
 
@@ -28,18 +28,21 @@ func _process(delta):
 func find_planet():
 	for body in planet_range.get_overlapping_bodies():
 		if body == planet: continue
-		if planet == null or position.distance_to(body.position) < position.distance_to(planet.position) - 50:
-			# TODO(Richo): Keep velocity but transformed to the new planet coordinate system?
-			var angle = up.rotated(PI).angle_to(body.position)
-			vel = vel.rotated(angle)
+		if planet == null or position.distance_to(body.position) < position.distance_to(planet.position):
+			# NOTE(Richo): Transform vel to the new planet coordinate system
+			var global_vel = vel.rotated(up.angle() + PI/2)
+			var new_up = (position - body.position).normalized()
+			var new_vel = global_vel.rotated(-(new_up.angle() + PI/2))
+			vel = new_vel
 			switching_planets = true
 			planet = body
 	
 func apply_gravity(delta):
-	if not grounded:
+	if planet and not grounded:
 		vel.y += 1500 * delta
 	
 func apply_input(delta):
+	if switching_planets: return
 	if aiming:
 		if Input.is_action_pressed(player + "_right"):
 			face_right()
@@ -50,14 +53,14 @@ func apply_input(delta):
 		if Input.is_action_pressed(player + "_up"):
 			if grounded:
 				vel.y = -300
-			elif not switching_planets:
-				vel.y -= 2000 * delta
+			elif not switching_planets and abs(vel.y) < 150:
+				vel.y -= 1750 * delta
 			
 		if Input.is_action_pressed(player + "_right"):
-			vel.x += 175
+			vel.x += 150
 			face_right()
 		elif Input.is_action_pressed(player + "_left"):
-			vel.x -= 175
+			vel.x -= 150
 			face_left()
 		else:
 			vel.x *= 0.75
@@ -102,9 +105,9 @@ func update_sprite():
 		sprite.play("jump")
 		
 func _physics_process(delta):
-	var actual_vel = vel.rotated(up.angle() + PI/2)
-	$vel_line.points[1] = actual_vel.rotated(-rotation) / 3
-	move_and_slide(actual_vel, up, true)
+	var global_vel = vel.rotated(up.angle() + PI/2)
+	$vel_line.points[1] = global_vel.rotated(-rotation) / 3
+	move_and_slide(global_vel, up, true)
 	grounded = false
 	for i in get_slide_count():
 		if get_slide_collision(i).collider == planet:
