@@ -23,6 +23,7 @@ modulate = Color( 1, 0.352941, 0, 1 )
 texture = ExtResource( 1 )
 
 [node name="vel_line" type="Line2D" parent="."]
+visible = false
 points = PoolVector2Array( 0, 0, 100, 0 )
 width = 1.0
 default_color = Color( 0.4, 0.501961, 1, 1 )
