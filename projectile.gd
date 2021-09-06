@@ -1,5 +1,5 @@
 extends Node2D
-class_name Missile
+class_name Projectile
 
 var velocity = Vector2()
 

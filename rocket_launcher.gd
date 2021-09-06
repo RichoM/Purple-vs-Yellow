@@ -7,7 +7,7 @@ var speed = -1.75
 var facing_right = true
 var aim_limit = PI/2
 
-var rocket = preload("res://missile.tscn")
+var rocket = preload("res://projectile.tscn")
 
 func _ready():
 	visible = false
@@ -29,7 +29,7 @@ func aim():
 	
 func shoot():
 	print(get_global_transform().get_rotation())
-	var new_rocket = rocket.instance() as Missile
+	var new_rocket = rocket.instance() as Projectile
 	get_tree().get_current_scene().add_child(new_rocket)
 	new_rocket.global_transform.origin = global_transform.origin
 	new_rocket.velocity = Vector2.ONE.rotated(get_global_transform().get_rotation() - PI/4) * rocket_speed
