@@ -154,9 +154,11 @@ shape = SubResource( 11 )
 
 [node name="player0" parent="." instance=ExtResource( 2 )]
 position = Vector2( -413.056, 12.383 )
+scale = Vector2( 1.35, 1.5 )
 
 [node name="player1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 398.351, -34.6109 )
+scale = Vector2( 1.35, 1.5 )
 player = "p1"
 
 [node name="sprite" parent="player1" index="0"]
