@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 onready var sprite = $sprite
 onready var planet_range = $range
@@ -10,19 +11,29 @@ var planet
 
 var up = Vector2.UP
 var vel = Vector2.DOWN * 300
-var grounded = false
 var max_speed = 200
 
+var grounded = false
 var aiming = false
-
 var switching_planets = false
+var dead = false
+
+func die():
+	dead = true
+	vel = Vector2(300 if sprite.flip_h else -300, -300)
+	yield(get_tree().create_timer(1), "timeout")
+	get_parent().remove_child(self)
 
 func _process(delta):
-	find_planet()
-	update_up()
-	apply_gravity(delta)
-	apply_input(delta)
-	update_sprite()
+	if dead:
+		rotate(-5 * delta)
+	else:
+		find_planet()
+		update_up()
+		apply_gravity(delta)
+		apply_input(delta)
+		update_sprite()
+		update_rotation()
 	update_gui()
 	
 func find_planet():
@@ -42,7 +53,7 @@ func apply_gravity(delta):
 		vel.y += 1500 * delta
 	
 func apply_input(delta):
-	if switching_planets: return
+	if switching_planets or dead: return
 	if aiming:
 		if Input.is_action_pressed(player + "_right"):
 			face_right()
@@ -95,7 +106,6 @@ func update_up():
 		up = dir.normalized()
 	
 func update_sprite():
-	rotation = up.angle() + PI/2
 	if grounded:
 		if abs(vel.x) > 100:
 			sprite.play("walk")
@@ -103,6 +113,9 @@ func update_sprite():
 			sprite.play("idle")
 	else:
 		sprite.play("jump")
+
+func update_rotation():
+	rotation = up.angle() + PI/2
 		
 func _physics_process(delta):
 	var global_vel = vel.rotated(up.angle() + PI/2)
