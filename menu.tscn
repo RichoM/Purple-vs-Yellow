@@ -135,10 +135,10 @@ current = true
 zoom = Vector2( 0.2, 0.2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -18.857
-margin_top = -25.1366
-margin_right = 21.143
-margin_bottom = 6.86334
+margin_left = -19.093
+margin_top = -32.7998
+margin_right = 20.907
+margin_bottom = -0.799864
 rect_pivot_offset = Vector2( 20, 16 )
 custom_fonts/font = SubResource( 8 )
 text = "vs"
@@ -148,9 +148,9 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="."]
-margin_left = -81.8945
+margin_left = -83.8945
 margin_top = -48.0525
-margin_right = -12.8945
+margin_right = -11.8945
 margin_bottom = -16.0525
 rect_pivot_offset = Vector2( 20, 16 )
 custom_fonts/font = SubResource( 9 )
