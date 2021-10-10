@@ -1,10 +1,10 @@
 # Purple-vs-Yellow
 
-A two player game I made for the [STOP WAITING FOR GODOT](https://itch.io/jam/stop-waiting-for-godot) jam.
+A two player game I made for the [STOP WAITING FOR GODOT](https://itch.io/jam/stop-waiting-for-godot) jam. You can [play it on itch.io](https://richo.itch.io/purple-vs-yellow).
 
 It's inspired by [Sagittarius](https://gprosser.itch.io/sagittarius) by George Prosser.
 
-Credits:
+### Credits:
 - Player sprites: [Pixel Line Platformer (1.0)](https://www.kenney.nl/assets/pixel-line-platformer) by Kenney
 - Planets sprites: [Pixel planets](https://opengameart.org/content/pixel-planets) by [Master848](https://m484games.ucoz.com/)
 - Background art: [Space Background](https://opengameart.org/content/space-background-3) by Luis Zuno (@ansimuz)

@@ -26,6 +26,7 @@ func _ready():
 
 func die(pos: Vector2):
 	dead = true
+	rocket_launcher.hide()
 	vel = Vector2(sign(position.x - pos.x) * 300, -300)
 	$shape.disabled = true
 	$sfx.play()
@@ -72,8 +73,8 @@ func apply_input(delta):
 		if Input.is_action_pressed(player + "_up"):
 			if grounded:
 				vel.y = -300
-			elif not switching_planets and abs(vel.y) < 150:
-				vel.y -= 1750 * delta
+			elif not switching_planets:# and abs(vel.y) < 150:
+				vel.y -= 100 #1750 * delta
 			
 		if Input.is_action_pressed(player + "_right"):
 			vel.x += 150
@@ -123,7 +124,8 @@ func update_sprite():
 		sprite.play("jump")
 
 func update_rotation():
-	rotation = up.angle() + PI/2
+	if grounded:
+		rotation = up.angle() + PI/2
 		
 func _physics_process(delta):
 	var global_vel = vel.rotated(up.angle() + PI/2)

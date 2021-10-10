@@ -3,6 +3,7 @@ extends Node2D
 var map = {}
 
 func _ready():
+	randomize()
 	map["p0_up"] = $w
 	map["p0_left"] = $a
 	map["p0_right"] = $d

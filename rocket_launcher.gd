@@ -3,7 +3,7 @@ class_name RocketLauncher
 
 export var rocket_speed = 250
 
-var speed = -1.75
+var speed = -3
 var facing_right = true
 var aim_limit = PI/2
 
@@ -36,3 +36,6 @@ func shoot():
 	new_rocket.position += new_rocket.velocity * 0.016 * 4 # Advance a couple of frames to avoid colliding with player
 	visible = false
 	$sfx.play()
+
+func hide():
+	visible = false
