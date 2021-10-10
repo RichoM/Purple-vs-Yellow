@@ -20,7 +20,7 @@ func apply_attractor(pos: Vector2, strength: float, delta):
 	var dir : Vector2 = pos - position
 	var length = dir.length()
 	dir = dir.normalized()
-	dir *= clamp(radius - length, 0, radius) * strength * 0.5
+	dir *= clamp(radius - length, 0, radius) * strength * 0.75
 	velocity += dir * delta
 
 
