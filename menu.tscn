@@ -40,14 +40,14 @@ region = Rect2( 16, 64, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "alive",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "dead",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "alive",
 "speed": 5.0
 } ]
 
@@ -153,8 +153,8 @@ margin_top = -48.0525
 margin_right = -11.8945
 margin_bottom = -16.0525
 rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.709804, 0, 0.407843, 1 )
+custom_fonts/font = SubResource( 9 )
 text = "Purple"
 align = 1
 __meta__ = {
@@ -167,8 +167,8 @@ margin_top = -47.3583
 margin_right = 83.0181
 margin_bottom = -15.3583
 rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 0.713726, 0, 1 )
+custom_fonts/font = SubResource( 9 )
 text = "Yellow"
 align = 1
 __meta__ = {
@@ -186,8 +186,8 @@ margin_left = -34.6606
 margin_top = -34.4407
 margin_right = 37.3394
 margin_bottom = -16.4407
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "JUMP/FLY"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -205,8 +205,8 @@ margin_left = -97.7576
 margin_top = -8.38428
 margin_right = -16.7576
 margin_bottom = 9.61572
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "MOVE LEFT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -224,8 +224,8 @@ margin_left = 20.7654
 margin_top = -7.85693
 margin_right = 84.7654
 margin_bottom = 8.14307
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "MOVE RIGHT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -243,8 +243,8 @@ margin_left = -38.3655
 margin_top = 30.2407
 margin_right = 42.6345
 margin_bottom = 48.2407
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "AIM/SHOOT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -267,8 +267,8 @@ margin_left = -34.6606
 margin_top = -34.4407
 margin_right = 37.3394
 margin_bottom = -16.4407
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "JUMP/FLY"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -286,8 +286,8 @@ margin_left = -97.7576
 margin_top = -8.38428
 margin_right = -16.7576
 margin_bottom = 9.61572
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "MOVE LEFT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -305,8 +305,8 @@ margin_left = 20.7654
 margin_top = -7.85693
 margin_right = 84.7654
 margin_bottom = 8.14307
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "MOVE RIGHT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -324,8 +324,8 @@ margin_left = -38.3655
 margin_top = 30.2407
 margin_right = 42.6345
 margin_bottom = 48.2407
-custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
 text = "AIM/SHOOT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -345,10 +345,10 @@ margin_left = -47.7996
 margin_top = 11.1782
 margin_right = 52.2004
 margin_bottom = 33.1782
-custom_fonts/font = SubResource( 11 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
 custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
 shortcut = SubResource( 13 )
 text = "PRESS ENTER"
 flat = true
