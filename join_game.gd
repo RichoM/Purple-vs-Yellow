@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var client = $client
+onready var client = Client
 
 export var url = "ws://192.168.0.230:9080"
 
@@ -46,7 +46,7 @@ func _lobby_joined(lobby):
 
 func _lobby_sealed():
 	_log("Lobby has been sealed")
-
+	get_tree().change_scene("res://game.tscn")
 
 func _mp_connected():
 	_log("Multiplayer is connected (I am %d)" % client.rtc_mp.get_unique_id())

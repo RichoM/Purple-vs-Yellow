@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var client = Client
 var game_over = false
 
 func _ready():
@@ -7,6 +8,16 @@ func _ready():
 		var sprite = planet.get_node("sprite") as AnimatedSprite
 		sprite.frame = rand_range(0, sprite.frames.get_frame_count(sprite.animation) - 1)
 		planet.scale = Vector2.ONE * rand_range(1, 4.5)
+		
+func _process(delta):
+	# receive incoming messages
+	client.rtc_mp.poll()
+	while client.rtc_mp.get_available_packet_count() > 0:
+		print(client.rtc_mp.get_packet().get_string_from_utf8())
+		
+	# send outgoing messages
+	var msg = str(OS.get_ticks_msec())
+	client.rtc_mp.put_packet(msg.to_utf8()) # TODO(Richo): Handle errors
 
 func _on_player0_tree_exited():
 	if game_over: return

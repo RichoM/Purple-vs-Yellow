@@ -1,20 +1,14 @@
 extends Node2D
 
-onready var client = $client
+onready var client = Client
 
 export var url = "ws://192.168.0.230:9080"
-
-var game_started = false
 
 func _ready():
 	init_event_handling()
 	start()
-	
+
 func _process(_delta):
-	if game_started:
-		var msg = str(OS.get_ticks_msec())
-		_log(client.rtc_mp.put_packet(msg.to_utf8()))
-	
 	client.rtc_mp.poll()
 	while client.rtc_mp.get_available_packet_count() > 0:
 		_log(client.rtc_mp.get_packet().get_string_from_utf8())
@@ -50,7 +44,7 @@ func _lobby_joined(lobby):
 
 func _lobby_sealed():
 	_log("Lobby has been sealed")
-
+	get_tree().change_scene("res://game.tscn")
 
 func _mp_connected():
 	_log("Multiplayer is connected (I am %d)" % client.rtc_mp.get_unique_id())
@@ -63,7 +57,6 @@ func _mp_server_disconnect():
 func _mp_peer_connected(id: int):
 	_log("Multiplayer peer %d connected" % id)
 	client.seal_lobby()
-	game_started = true
 
 
 func _mp_peer_disconnected(id: int):
