@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://hue.gdshader" type="Shader" id=1]
+[ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
+[ext_resource path="res://space_background_pack/layers/parallax-space-far-planets.png" type="Texture" id=3]
+[ext_resource path="res://space_background_pack/layers/parallax-space-stars.png" type="Texture" id=4]
+[ext_resource path="res://new_game.gd" type="Script" id=5]
+[ext_resource path="res://client.gd" type="Script" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/Shift_Hue = -0.514
+shader_param/Shift_Sat = 0.265
+shader_param/Shift_Val = -0.038
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/Shift_Hue = 0.616
+shader_param/Shift_Sat = 0.223
+shader_param/Shift_Val = 0.257
+
+[node name="new_game" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="client" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="background2" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 0, -4.194 )
+scale = Vector2( 1.13665, 0.940339 )
+texture = ExtResource( 2 )
+
+[node name="background3" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 0.84332, 0.978562 )
+scale = Vector2( 0.751, 0.751 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="background4" type="Sprite" parent="."]
+position = Vector2( 0, -3.17024 )
+scale = Vector2( 0.831059, 0.870687 )
+texture = ExtResource( 3 )
+
+[node name="camera" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.2, 0.2 )
+
+[node name="game_id" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -63.0
+margin_top = -18.0
+margin_right = 64.0
+margin_bottom = 17.0
+text = "1234ABCD"
+align = 1
+editable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

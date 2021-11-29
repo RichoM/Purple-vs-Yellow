@@ -337,6 +337,7 @@ width = 2.0
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="press_enter" type="Node2D" parent="."]
+visible = false
 position = Vector2( 0.297302, 5.47046 )
 scale = Vector2( 0.55, 0.55 )
 
@@ -356,4 +357,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="new_game" type="Node2D" parent="."]
+position = Vector2( 0.297302, 5.47046 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="new_game_button" type="Button" parent="new_game"]
+margin_left = -47.7996
+margin_top = -3.25271
+margin_right = 52.2004
+margin_bottom = 18.7473
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "NEW GAME"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join_game" type="Node2D" parent="."]
+position = Vector2( 0.297302, 5.47046 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="join_game_button" type="Button" parent="join_game"]
+margin_left = -47.7996
+margin_top = 15.5075
+margin_right = 52.2004
+margin_bottom = 37.5075
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "JOIN GAME"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="press_enter/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="new_game/new_game_button" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="join_game/join_game_button" to="." method="_on_join_game_button_pressed"]

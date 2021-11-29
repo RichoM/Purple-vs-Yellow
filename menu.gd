@@ -27,3 +27,11 @@ func _process(_delta):
 			var frame = sprite.frame
 			sprite.animation = "released"
 			sprite.frame = frame
+
+
+func _on_new_game_button_pressed():
+	get_tree().change_scene("res://new_game.tscn")
+
+
+func _on_join_game_button_pressed():
+	get_tree().change_scene("res://join_game.tscn")
