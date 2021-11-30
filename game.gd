@@ -4,6 +4,8 @@ onready var client = Client
 var game_over = false
 
 func _ready():
+	Globals.level = Globals.level + 1
+	seed(Globals.level)
 	for planet in $planets.get_children():
 		var sprite = planet.get_node("sprite") as AnimatedSprite
 		sprite.frame = rand_range(0, sprite.frames.get_frame_count(sprite.animation) - 1)
