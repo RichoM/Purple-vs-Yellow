@@ -16,6 +16,8 @@ func _ready():
 	opponent.is_local = false
 	player.player = "p1"
 	opponent.player = "p0"
+	player.visible = true
+	opponent.visible = false
 	
 	Globals.level = Globals.level + 1
 	seed(Globals.level)
@@ -40,6 +42,7 @@ func receive_incoming_messages():
 		var packet = null
 		packet = client.rtc_mp.get_packet()
 		if packet != null:
+			opponent.visible = true
 			var msg = packet.get_string_from_utf8()
 			var json = JSON.parse(msg).result
 			var player_data = json["player"]
@@ -56,6 +59,9 @@ func receive_incoming_messages():
 					opponent.rocket_launcher.visible = true
 			else:
 				opponent.rocket_launcher.visible = false
+			if player_data["dead"] and not opponent.dead:
+				opponent.die()
+				print("OPPONENT DEAD")
 			var projectile_data = json["projectiles"]
 			for projectile in projectile_data:
 				var new_rocket = preload("res://projectile.tscn").instance() as Projectile
@@ -69,7 +75,8 @@ func send_outgoing_messages():
 						"r": player.global_rotation,
 						"facing_right": player.facing_right(),
 						"animation": player.sprite.animation,
-						"aiming": player.rocket_launcher.rotation if player.aiming else null}
+						"aiming": player.rocket_launcher.rotation if player.aiming else null,
+						"dead": player.dead}
 	var projectile_data = []
 	for projectile in projectiles:
 		projectile_data.append({"x": projectile.global_position.x,

@@ -27,10 +27,14 @@ func _ready():
 	else:
 		face_right()
 
-func die(pos: Vector2):
+func explode(pos: Vector2):
+	if not is_local: return
+	vel = Vector2(sign(position.x - pos.x) * 300, -300)
+	die()
+	
+func die():
 	dead = true
 	rocket_launcher.hide()
-	vel = Vector2(sign(position.x - pos.x) * 300, -300)
 	$shape.disabled = true
 	$sfx.play()
 	yield(get_tree().create_timer(1), "timeout")
