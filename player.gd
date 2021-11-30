@@ -6,7 +6,7 @@ onready var planet_range = $range
 onready var rocket_launcher = $rocket_launcher as RocketLauncher
 
 export var player = "p0"
-export var input_enabled = true
+export var is_local = true
 
 var planet
 
@@ -35,6 +35,7 @@ func die(pos: Vector2):
 	get_parent().remove_child(self)
 
 func _process(delta):
+	if not is_local: return
 	if dead:
 		rotate(-5 * delta)
 	else:
@@ -63,7 +64,6 @@ func apply_gravity(delta):
 		vel.y += 1500 * delta
 	
 func apply_input(delta):
-	if not input_enabled: return
 	if switching_planets or dead: return
 	if aiming:
 		if Input.is_action_pressed(player + "_right"):
@@ -130,6 +130,7 @@ func update_rotation():
 		rotation = up.angle() + PI/2
 		
 func _physics_process(delta):
+	if not is_local: return
 	var global_vel = vel.rotated(up.angle() + PI/2)
 	$vel_line.points[1] = global_vel.rotated(-rotation) / 3
 	move_and_slide(global_vel, up, true)
