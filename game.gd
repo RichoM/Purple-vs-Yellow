@@ -6,8 +6,17 @@ onready var p1 = $player1
 
 var game_over = false
 var projectiles = []
+var player = null
+var opponent = null
 
 func _ready():
+	player = p0 if Globals.player == 0 else p1
+	opponent = p1 if Globals.player == 0 else p0
+	player.is_local = true
+	opponent.is_local = false
+	player.player = "p1"
+	opponent.player = "p0"
+	
 	Globals.level = Globals.level + 1
 	seed(Globals.level)
 	for planet in $planets.get_children():
@@ -15,7 +24,7 @@ func _ready():
 		sprite.frame = rand_range(0, sprite.frames.get_frame_count(sprite.animation) - 1)
 		planet.scale = Vector2.ONE * rand_range(1, 4.5)
 		
-	p0.connect("projectile_shot", self, "_on_projectile_shot")
+	player.connect("projectile_shot", self, "_on_projectile_shot")
 
 func _on_projectile_shot(p):
 	projectiles.append(p)
@@ -34,19 +43,19 @@ func receive_incoming_messages():
 			var msg = packet.get_string_from_utf8()
 			var json = JSON.parse(msg).result
 			var player_data = json["player"]
-			p1.global_position = Vector2(player_data["x"], player_data["y"])
-			p1.global_rotation = player_data["r"]
+			opponent.global_position = Vector2(player_data["x"], player_data["y"])
+			opponent.global_rotation = player_data["r"]
 			if player_data["facing_right"]:
-				p1.face_right()
+				opponent.face_right()
 			else:
-				p1.face_left()
-			p1.sprite.play(player_data["animation"])
+				opponent.face_left()
+			opponent.sprite.play(player_data["animation"])
 			if player_data["aiming"] != null:
-				if not p1.rocket_launcher.visible:
-					p1.rocket_launcher.rotation = player_data["aiming"]
-					p1.rocket_launcher.visible = true
+				if not opponent.rocket_launcher.visible:
+					opponent.rocket_launcher.rotation = player_data["aiming"]
+					opponent.rocket_launcher.visible = true
 			else:
-				p1.rocket_launcher.visible = false
+				opponent.rocket_launcher.visible = false
 			var projectile_data = json["projectiles"]
 			for projectile in projectile_data:
 				var new_rocket = preload("res://projectile.tscn").instance() as Projectile
@@ -55,12 +64,12 @@ func receive_incoming_messages():
 				new_rocket.velocity = Vector2(projectile["v"]["x"], projectile["v"]["y"])
 		
 func send_outgoing_messages():
-	var player_data = {"x": p0.global_position.x,
-						"y": p0.global_position.y,
-						"r": p0.global_rotation,
-						"facing_right": p0.facing_right(),
-						"animation": p0.sprite.animation,
-						"aiming": p0.rocket_launcher.rotation if p0.aiming else null}
+	var player_data = {"x": player.global_position.x,
+						"y": player.global_position.y,
+						"r": player.global_rotation,
+						"facing_right": player.facing_right(),
+						"animation": player.sprite.animation,
+						"aiming": player.rocket_launcher.rotation if player.aiming else null}
 	var projectile_data = []
 	for projectile in projectiles:
 		projectile_data.append({"x": projectile.global_position.x,

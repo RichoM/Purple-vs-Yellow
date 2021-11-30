@@ -47,6 +47,7 @@ func _lobby_joined(lobby):
 func _lobby_sealed():
 	_log("Lobby has been sealed")
 	Globals.level = Client.lobby.hash()
+	Globals.player = 1
 	get_tree().change_scene("res://game.tscn")
 
 func _mp_connected():
