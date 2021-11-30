@@ -21,13 +21,11 @@ func _process(delta):
 func receive_incoming_messages():
 	client.rtc_mp.poll()
 	
-	var msg = null
+	var packet = null
 	while client.rtc_mp.get_available_packet_count() > 0:
-		var packet = client.rtc_mp.get_packet()
-		msg = packet.get_string_from_utf8()
-		print(msg)
-	
-	if msg != null:
+		packet = client.rtc_mp.get_packet()
+	if packet != null:
+		var msg = packet.get_string_from_utf8()
 		var json = JSON.parse(msg).result
 		p1.global_position = Vector2(json["x"], json["y"])
 		p1.global_rotation = json["r"]
