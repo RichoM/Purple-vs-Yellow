@@ -36,6 +36,16 @@ func receive_incoming_messages():
 			var player_data = json["player"]
 			p1.global_position = Vector2(player_data["x"], player_data["y"])
 			p1.global_rotation = player_data["r"]
+			if player_data["facing_right"]:
+				p1.face_right()
+			else:
+				p1.face_left()
+			p1.sprite.play(player_data["animation"])
+			if player_data["aiming"] != null:
+				p1.rocket_launcher.visible = true
+				p1.rocket_launcher.rotation = player_data["aiming"]
+			else:
+				p1.rocket_launcher.visible = false
 			var projectile_data = json["projectiles"]
 			for projectile in projectile_data:
 				var new_rocket = preload("res://projectile.tscn").instance() as Projectile
@@ -46,7 +56,10 @@ func receive_incoming_messages():
 func send_outgoing_messages():
 	var player_data = {"x": p0.global_position.x,
 						"y": p0.global_position.y,
-						"r": p0.global_rotation}
+						"r": p0.global_rotation,
+						"facing_right": p0.facing_right(),
+						"animation": p0.sprite.animation,
+						"aiming": p0.rocket_launcher.rotation if p0.aiming else null}
 	var projectile_data = []
 	for projectile in projectiles:
 		projectile_data.append({"x": projectile.global_position.x,

@@ -110,6 +110,9 @@ func face_left():
 	sprite.flip_h = true
 	rocket_launcher.facing_right = false
 	
+func facing_right():
+	return rocket_launcher.facing_right
+	
 func update_gui():
 	$ground_label.text = str(grounded)
 	$vel_label.text = str(vel)
