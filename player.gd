@@ -6,6 +6,7 @@ onready var planet_range = $range
 onready var rocket_launcher = $rocket_launcher as RocketLauncher
 
 export var player = "p0"
+export var input_enabled = true
 
 var planet
 
@@ -62,6 +63,7 @@ func apply_gravity(delta):
 		vel.y += 1500 * delta
 	
 func apply_input(delta):
+	if not input_enabled: return
 	if switching_planets or dead: return
 	if aiming:
 		if Input.is_action_pressed(player + "_right"):

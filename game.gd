@@ -1,6 +1,9 @@
 extends Node2D
 
 onready var client = Client
+onready var p0 = $player0
+onready var p1 = $player1
+
 var game_over = false
 
 func _ready():
@@ -12,13 +15,23 @@ func _ready():
 		planet.scale = Vector2.ONE * rand_range(1, 4.5)
 		
 func _process(delta):
-	# receive incoming messages
+	receive_incoming_messages()
+	call_deferred("send_outgoing_messages")
+	
+func receive_incoming_messages():
 	client.rtc_mp.poll()
 	while client.rtc_mp.get_available_packet_count() > 0:
-		print(client.rtc_mp.get_packet().get_string_from_utf8())
+		var packet = client.rtc_mp.get_packet()
+		var msg = packet.get_string_from_utf8()
+		var json = JSON.parse(msg).result
+		p1.global_position = Vector2(json["x"], json["y"])
+		p1.global_rotation = json["r"]
 		
-	# send outgoing messages
-	var msg = str(OS.get_ticks_msec())
+func send_outgoing_messages():
+	var data = {"x": p0.global_position.x,
+				"y": p0.global_position.y,
+				"r": p0.global_rotation}
+	var msg = JSON.print(data)
 	client.rtc_mp.put_packet(msg.to_utf8()) # TODO(Richo): Handle errors
 
 func _on_player0_tree_exited():

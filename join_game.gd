@@ -2,7 +2,7 @@ extends Node2D
 
 onready var client = Client
 
-export var url = "ws://192.168.0.230:9080"
+export var url = "ws://127.0.0.1:9080"
 
 func _ready():
 	init_event_handling()

@@ -184,6 +184,7 @@ scale = Vector2( 1.35, 1.5 )
 position = Vector2( 369.222, 0 )
 scale = Vector2( 1.35, 1.5 )
 player = "p1"
+input_enabled = false
 
 [node name="sprite" parent="player1" index="0"]
 material = SubResource( 3 )
