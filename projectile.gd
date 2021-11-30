@@ -2,6 +2,7 @@ extends Node2D
 class_name Projectile
 
 var velocity = Vector2()
+var exploded = false
 
 onready var explosion_range = $explosion_range
 onready var radius = $gravity_range/shape.shape.radius
@@ -39,6 +40,7 @@ func explode():
 	show_damage()
 	var parent = get_parent()
 	if parent: parent.remove_child(self)
+	exploded = true
 	
 func show_damage():    
 	var explosion = explosion_range.get_node("explosion")

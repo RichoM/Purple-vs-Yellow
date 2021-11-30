@@ -36,6 +36,7 @@ func shoot():
 	new_rocket.position += new_rocket.velocity * 0.016 * 4 # Advance a couple of frames to avoid colliding with player
 	visible = false
 	$sfx.play()
+	return new_rocket
 
 func hide():
 	visible = false

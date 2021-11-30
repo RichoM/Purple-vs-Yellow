@@ -19,6 +19,8 @@ var aiming = false
 var switching_planets = false
 var dead = false
 
+signal projectile_shot(projectile)
+
 func _ready():
 	if position.x > 0:
 		face_left()
@@ -36,6 +38,7 @@ func die(pos: Vector2):
 
 func _process(delta):
 	if not is_local: return
+	
 	if dead:
 		rotate(-5 * delta)
 	else:
@@ -92,7 +95,8 @@ func apply_input(delta):
 			rocket_launcher.aim()
 			vel.x = 0
 		else:
-			rocket_launcher.shoot()
+			var projectile = rocket_launcher.shoot()
+			emit_signal("projectile_shot", projectile)
 		aiming = !aiming
 		
 	vel.x = clamp(vel.x, -max_speed, max_speed)

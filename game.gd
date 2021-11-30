@@ -5,6 +5,7 @@ onready var p0 = $player0
 onready var p1 = $player1
 
 var game_over = false
+var projectiles = []
 
 func _ready():
 	Globals.level = Globals.level + 1
@@ -14,6 +15,11 @@ func _ready():
 		sprite.frame = rand_range(0, sprite.frames.get_frame_count(sprite.animation) - 1)
 		planet.scale = Vector2.ONE * rand_range(1, 4.5)
 		
+	p0.connect("projectile_shot", self, "_on_projectile_shot")
+
+func _on_projectile_shot(p):
+	projectiles.append(p)
+		
 func _process(delta):
 	receive_incoming_messages()
 	call_deferred("send_outgoing_messages")
@@ -21,22 +27,41 @@ func _process(delta):
 func receive_incoming_messages():
 	client.rtc_mp.poll()
 	
-	var packet = null
 	while client.rtc_mp.get_available_packet_count() > 0:
+		var packet = null
 		packet = client.rtc_mp.get_packet()
-	if packet != null:
-		var msg = packet.get_string_from_utf8()
-		var json = JSON.parse(msg).result
-		p1.global_position = Vector2(json["x"], json["y"])
-		p1.global_rotation = json["r"]
+		if packet != null:
+			var msg = packet.get_string_from_utf8()
+			var json = JSON.parse(msg).result
+			var player_data = json["player"]
+			p1.global_position = Vector2(player_data["x"], player_data["y"])
+			p1.global_rotation = player_data["r"]
+			var projectile_data = json["projectiles"]
+			for projectile in projectile_data:
+				print("PROJECTILE!!!!!")
+				var new_rocket = preload("res://projectile.tscn").instance() as Projectile
+				get_tree().get_current_scene().add_child(new_rocket)
+				new_rocket.global_position = Vector2(projectile["x"], projectile["y"])
+				new_rocket.velocity = Vector2(projectile["v"]["x"], projectile["v"]["y"])
 		
 func send_outgoing_messages():
-	var data = {"t": OS.get_ticks_msec(),
-				"x": p0.global_position.x,
-				"y": p0.global_position.y,
-				"r": p0.global_rotation}
+	var player_data = {"x": p0.global_position.x,
+						"y": p0.global_position.y,
+						"r": p0.global_rotation}
+	var projectile_data = []
+	for projectile in projectiles:
+		projectile_data.append({"x": projectile.global_position.x,
+								"y": projectile.global_position.y,
+								"v": {"x": projectile.velocity.x, "y": projectile.velocity.y}})
+	var data = {"t": OS.get_ticks_msec(), # TODO(Richo): Sync timestamp?
+				"player": player_data,
+				"projectiles": projectile_data}
 	var msg = JSON.print(data)
-	client.rtc_mp.put_packet(msg.to_utf8()) # TODO(Richo): Handle errors
+	print(msg)
+	if client.rtc_mp.put_packet(msg.to_utf8()) != 0:
+		# TODO(Richo): Handle errors
+		print("ERROR!")
+	projectiles.clear()
 
 func _on_player0_tree_exited():
 	if game_over: return
