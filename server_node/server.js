@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const MAX_PEERS = 4096;
 const MAX_LOBBIES = 1024;
 const PORT = 9080;
-const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 const NO_LOBBY_TIMEOUT = 1000;
 const SEAL_CLOSE_TIMEOUT = 10000;
@@ -34,9 +34,9 @@ function randomId () {
 	return Math.abs(new Int32Array(crypto.randomBytes(4).buffer)[0]);
 }
 
-function randomSecret () {
+function randomSecret (size) {
 	let out = "";
-	for (let i = 0; i < 16; i++) {
+	for (let i = 0; i < size; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
 	return out;
@@ -136,7 +136,18 @@ function joinLobby (peer, pLobby) {
 		if (peer.lobby !== "") {
 			throw new ProtoError(4000, STR_ALREADY_IN_LOBBY);
 		}
-		lobbyName = randomSecret();
+
+		let size = 4;
+		let count = 0;
+		do {
+			if (count >= 100) {
+				count = 0;
+				size++;
+			}
+			lobbyName = randomSecret(size);
+			count++;
+		} while (lobbies.has(lobbyName));
+
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
 		console.log(`Peer ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
