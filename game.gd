@@ -42,8 +42,9 @@ func receive_incoming_messages():
 				p1.face_left()
 			p1.sprite.play(player_data["animation"])
 			if player_data["aiming"] != null:
-				p1.rocket_launcher.visible = true
-				p1.rocket_launcher.rotation = player_data["aiming"]
+				if not p1.rocket_launcher.visible:
+					p1.rocket_launcher.rotation = player_data["aiming"]
+					p1.rocket_launcher.visible = true
 			else:
 				p1.rocket_launcher.visible = false
 			var projectile_data = json["projectiles"]
