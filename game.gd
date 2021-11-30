@@ -38,7 +38,6 @@ func receive_incoming_messages():
 			p1.global_rotation = player_data["r"]
 			var projectile_data = json["projectiles"]
 			for projectile in projectile_data:
-				print("PROJECTILE!!!!!")
 				var new_rocket = preload("res://projectile.tscn").instance() as Projectile
 				get_tree().get_current_scene().add_child(new_rocket)
 				new_rocket.global_position = Vector2(projectile["x"], projectile["y"])
@@ -57,7 +56,6 @@ func send_outgoing_messages():
 				"player": player_data,
 				"projectiles": projectile_data}
 	var msg = JSON.print(data)
-	print(msg)
 	if client.rtc_mp.put_packet(msg.to_utf8()) != 0:
 		# TODO(Richo): Handle errors
 		print("ERROR!")
