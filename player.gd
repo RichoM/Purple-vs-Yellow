@@ -7,6 +7,7 @@ onready var rocket_launcher = $rocket_launcher as RocketLauncher
 
 export var player = "p0"
 export var is_local = true
+export var input_enabled = true
 
 var planet
 
@@ -50,6 +51,7 @@ func _process(delta):
 		update_up()
 		apply_gravity(delta)
 		apply_input(delta)
+		limit_vel()
 		update_sprite()
 		update_rotation()
 	update_gui()
@@ -71,6 +73,7 @@ func apply_gravity(delta):
 		vel.y += 1500 * delta
 	
 func apply_input(delta):
+	if not input_enabled: return
 	if switching_planets or dead: return
 	if aiming:
 		if Input.is_action_pressed(player + "_right"):
@@ -86,14 +89,12 @@ func apply_input(delta):
 				vel.y -= 100 #1750 * delta
 			
 		if Input.is_action_pressed(player + "_right"):
-			vel.x += 150
+			vel.x += 175
 			face_right()
 		elif Input.is_action_pressed(player + "_left"):
-			vel.x -= 150
+			vel.x -= 175
 			face_left()
-		else:
-			vel.x *= 0.75
-		
+			
 	if grounded and Input.is_action_just_pressed(player + "_action"):
 		if not aiming: 
 			rocket_launcher.aim()
@@ -102,7 +103,9 @@ func apply_input(delta):
 			var projectile = rocket_launcher.shoot()
 			emit_signal("projectile_shot", projectile)
 		aiming = !aiming
-		
+
+func limit_vel():
+	vel.x *= 0.75
 	vel.x = clamp(vel.x, -max_speed, max_speed)
 	vel.y = clamp(vel.y, -300, 300)
 	

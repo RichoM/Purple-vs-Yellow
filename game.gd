@@ -13,11 +13,13 @@ func _ready():
 	player = p0 if Globals.player == 0 else p1
 	opponent = p1 if Globals.player == 0 else p0
 	player.is_local = true
-	opponent.is_local = false
 	player.player = "p1"
-	opponent.player = "p0"
 	player.visible = true
+	player.input_enabled = false
+	opponent.is_local = false
+	opponent.player = "p0"
 	opponent.visible = false
+	opponent.input_enabled = false
 	
 	Globals.level = Globals.level + 1
 	seed(Globals.level)
@@ -42,6 +44,7 @@ func receive_incoming_messages():
 		var packet = null
 		packet = client.rtc_mp.get_packet()
 		if packet != null:
+			player.input_enabled = true
 			opponent.visible = true
 			var msg = packet.get_string_from_utf8()
 			var json = JSON.parse(msg).result
