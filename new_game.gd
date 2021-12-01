@@ -2,8 +2,6 @@ extends Node2D
 
 onready var client = Client
 
-export var url = "ws://bbcf-186-152-147-30.sa.ngrok.io"
-
 func _ready():
 	init_event_handling()
 	start()
@@ -24,7 +22,7 @@ func init_event_handling():
 	client.rtc_mp.connect("connection_succeeded", self, "_mp_connected")
 
 func start():
-	client.start(url, "")
+	client.start(Globals.server_url, "")
 
 func _log(msg):
 	print(msg)

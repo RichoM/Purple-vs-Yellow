@@ -2,8 +2,6 @@ extends Node2D
 
 onready var client = Client
 
-export var url = "ws://bbcf-186-152-147-30.sa.ngrok.io"
-
 func _ready():
 	init_event_handling()
 	
@@ -27,7 +25,7 @@ func _on_join_button_pressed():
 	start($game_id.text)
 
 func start(lobby):
-	client.start(url, lobby)
+	client.start(Globals.server_url, lobby)
 
 func _log(msg):
 	print(msg)
