@@ -3,7 +3,7 @@ extends Node
 var timestamp_begin = 0
 var level = 1
 var player = null
-var server_url = "ws://042c-186-152-147-30.sa.ngrok.io"
+var server_url = "wss://fathomless-badlands-10412.herokuapp.com"
 
 func _process(delta):
 	if Input.is_action_just_released("mute"):
