@@ -136,3 +136,9 @@ func winner(winner):
 		end_scene.get_node("winner/yellow").visible = true
 	
 	root.add_child(end_scene)
+
+
+func _on_timer_timeout():
+	return
+	receive_incoming_messages()
+	call_deferred("send_outgoing_messages")

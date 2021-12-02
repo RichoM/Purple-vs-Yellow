@@ -193,7 +193,12 @@ stream = ExtResource( 6 )
 volume_db = -5.0
 autoplay = true
 
+[node name="timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="tree_exited" from="player0" to="." method="_on_player0_tree_exited"]
 [connection signal="tree_exited" from="player1" to="." method="_on_player1_tree_exited"]
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
 [editable path="player1"]
