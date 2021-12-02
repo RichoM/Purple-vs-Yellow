@@ -53,10 +53,6 @@ func receive_incoming_messages():
 			opponent.visible = true
 			var msg = packet.get_string_from_utf8()
 			var json = JSON.parse(msg).result
-			
-			var ts = json["t"]
-			print(ts)
-			
 			var player_data = json["player"]
 			opponent.global_position = Vector2(player_data["x"], player_data["y"])
 			opponent.global_rotation = player_data["r"]
@@ -78,7 +74,13 @@ func receive_incoming_messages():
 			for projectile in projectile_data:
 				var pos = Vector2(projectile["x"], projectile["y"])
 				var vel = Vector2(projectile["v"]["x"], projectile["v"]["y"])
-				opponent.rocket_launcher.shoot_at(pos, vel)
+				var new_rocket = opponent.rocket_launcher.shoot_at(pos, vel)
+				var t_stop = json["t"]
+				var t_delta = 0.016
+				var t = Globals.get_timestamp()
+				while t < t_stop:
+					new_rocket._process(t_delta)
+					t += t_delta
 		
 func send_outgoing_messages():
 	var player_data = {"x": player.global_position.x,
