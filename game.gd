@@ -10,14 +10,19 @@ var player = null
 var opponent = null
 
 func _ready():
-	player = p0 if Globals.player == 0 else p1
-	opponent = p1 if Globals.player == 0 else p0
+	if Globals.player == 0:
+		player = p0
+		opponent = p1
+	else:
+		player = p1
+		opponent = p0
+		
 	player.is_local = true
-	player.player = "p1"
+	player.input_map = "p"
 	player.visible = true
 	player.input_enabled = false
 	opponent.is_local = false
-	opponent.player = "p0"
+	opponent.input_map = "p"
 	opponent.visible = false
 	opponent.input_enabled = false
 	

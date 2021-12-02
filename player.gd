@@ -5,7 +5,7 @@ onready var sprite = $sprite
 onready var planet_range = $range
 onready var rocket_launcher = $rocket_launcher as RocketLauncher
 
-export var player = "p0"
+export var input_map = "p0"
 export var is_local = true
 export var input_enabled = true
 
@@ -76,26 +76,26 @@ func apply_input(delta):
 	if not input_enabled: return
 	if switching_planets or dead: return
 	if aiming:
-		if Input.is_action_pressed(player + "_right"):
+		if Input.is_action_pressed(input_map + "_right"):
 			face_right()
-		elif Input.is_action_pressed(player + "_left"):
+		elif Input.is_action_pressed(input_map + "_left"):
 			face_left()
 			
 	if not aiming:
-		if Input.is_action_pressed(player + "_up"):
+		if Input.is_action_pressed(input_map + "_up"):
 			if grounded:
 				vel.y = -300
 			elif not switching_planets:# and abs(vel.y) < 150:
 				vel.y -= 100 #1750 * delta
 			
-		if Input.is_action_pressed(player + "_right"):
+		if Input.is_action_pressed(input_map + "_right"):
 			vel.x += 175
 			face_right()
-		elif Input.is_action_pressed(player + "_left"):
+		elif Input.is_action_pressed(input_map + "_left"):
 			vel.x -= 175
 			face_left()
 			
-	if grounded and Input.is_action_just_pressed(player + "_action"):
+	if grounded and Input.is_action_just_pressed(input_map + "_action"):
 		if not aiming: 
 			rocket_launcher.aim()
 			vel.x = 0
