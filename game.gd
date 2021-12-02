@@ -53,6 +53,10 @@ func receive_incoming_messages():
 			opponent.visible = true
 			var msg = packet.get_string_from_utf8()
 			var json = JSON.parse(msg).result
+			
+			var ts = json["t"]
+			print(ts)
+			
 			var player_data = json["player"]
 			opponent.global_position = Vector2(player_data["x"], player_data["y"])
 			opponent.global_rotation = player_data["r"]
@@ -89,7 +93,7 @@ func send_outgoing_messages():
 		projectile_data.append({"x": projectile.global_position.x,
 								"y": projectile.global_position.y,
 								"v": {"x": projectile.velocity.x, "y": projectile.velocity.y}})
-	var data = {"t": OS.get_ticks_msec(), # TODO(Richo): Sync timestamp?
+	var data = {"t": Globals.get_timestamp(),
 				"player": player_data,
 				"projectiles": projectile_data}
 	var msg = JSON.print(data)
