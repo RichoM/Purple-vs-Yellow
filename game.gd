@@ -72,10 +72,9 @@ func receive_incoming_messages():
 				print("OPPONENT DEAD")
 			var projectile_data = json["projectiles"]
 			for projectile in projectile_data:
-				var new_rocket = preload("res://projectile.tscn").instance() as Projectile
-				get_tree().get_current_scene().add_child(new_rocket)
-				new_rocket.global_position = Vector2(projectile["x"], projectile["y"])
-				new_rocket.velocity = Vector2(projectile["v"]["x"], projectile["v"]["y"])
+				var pos = Vector2(projectile["x"], projectile["y"])
+				var vel = Vector2(projectile["v"]["x"], projectile["v"]["y"])
+				opponent.rocket_launcher.shoot_at(pos, vel)
 		
 func send_outgoing_messages():
 	var player_data = {"x": player.global_position.x,

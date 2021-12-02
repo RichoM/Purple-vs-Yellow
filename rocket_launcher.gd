@@ -28,12 +28,15 @@ func aim():
 	visible = true
 	
 func shoot():
-	print(get_global_transform().get_rotation())
+	var new_rocket = shoot_at(global_position, Vector2.ONE.rotated(get_global_transform().get_rotation() - PI/4) * rocket_speed)
+	new_rocket.position += new_rocket.velocity * 0.016 * 4 # Advance a couple of frames to avoid colliding with player
+	return new_rocket
+	
+func shoot_at(pos, vel):
 	var new_rocket = rocket.instance() as Projectile
 	get_tree().get_current_scene().add_child(new_rocket)
-	new_rocket.global_transform.origin = global_transform.origin
-	new_rocket.velocity = Vector2.ONE.rotated(get_global_transform().get_rotation() - PI/4) * rocket_speed
-	new_rocket.position += new_rocket.velocity * 0.016 * 4 # Advance a couple of frames to avoid colliding with player
+	new_rocket.global_position = pos
+	new_rocket.velocity = vel
 	visible = false
 	$sfx.play()
 	return new_rocket
