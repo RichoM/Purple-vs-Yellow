@@ -79,7 +79,7 @@ func receive_incoming_messages():
 				var t_delta = 0.016
 				var t = Globals.get_timestamp()
 				while t < t_stop:
-					new_rocket._process(t_delta)
+					new_rocket._physics_process(t_delta)
 					t += t_delta
 		
 func send_outgoing_messages():

@@ -9,7 +9,7 @@ onready var radius = $gravity_range/shape.shape.radius
 
 var attractors_in_range = []
 
-func _process(delta):
+func _physics_process(delta):
 	#apply_attractor(get_global_mouse_position(), 10, delta)
 	for attractor in attractors_in_range:
 		apply_attractor(attractor.position, attractor.scale.x, delta)
