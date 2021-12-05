@@ -14,3 +14,6 @@ func get_timestamp():
 
 func reset_timestamp():
 	timestamp_begin = OS.get_ticks_msec()
+	
+func adjust_timestamp(dec):
+	timestamp_begin -= dec

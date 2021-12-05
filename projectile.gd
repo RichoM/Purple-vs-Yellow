@@ -3,6 +3,7 @@ class_name Projectile
 
 var velocity = Vector2()
 var exploded = false
+var is_local = true
 
 onready var explosion_range = $explosion_range
 onready var radius = $gravity_range/shape.shape.radius
@@ -32,7 +33,9 @@ func _on_range_body_exited(body):
 	attractors_in_range.erase(body)
 
 func _on_collision_range_body_entered(body):
-	call_deferred("explode")
+	if not is_local: return
+	#call_deferred("explode")
+	exploded = true
 	
 func explode():
 	for body in explosion_range.get_overlapping_bodies():
@@ -40,7 +43,7 @@ func explode():
 	show_damage()
 	var parent = get_parent()
 	if parent: parent.remove_child(self)
-	exploded = true
+	#exploded = true
 	
 func show_damage():    
 	var explosion = explosion_range.get_node("explosion")
