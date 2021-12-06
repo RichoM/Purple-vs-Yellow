@@ -173,16 +173,6 @@ func winner(winner):
 
 	# Add end scene
 	var end_scene = preload("res://end.tscn").instance()
-	var p0 = end_scene.get_node("p0")
-	var p1 = end_scene.get_node("p1")
-	if winner == "p0":
-		p0.play("alive")
-		p1.play("dead")
-		end_scene.get_node("winner/purple").visible = true
-	else:
-		p1.play("alive")
-		p0.play("dead")
-		end_scene.get_node("winner/yellow").visible = true
-	
+	end_scene.winner = winner
 	root.add_child(end_scene)
 

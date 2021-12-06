@@ -15,7 +15,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 72
-outline_size = 1
+outline_size = 2
 font_data = ExtResource( 7 )
 
 [sub_resource type="InputEventAction" id=4]
