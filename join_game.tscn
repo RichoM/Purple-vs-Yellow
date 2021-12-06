@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://hue.gdshader" type="Shader" id=1]
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
@@ -7,6 +7,22 @@
 [ext_resource path="res://join_game.gd" type="Script" id=5]
 [ext_resource path="res://lobby.gd" type="Script" id=6]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=6]
+size = 72
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 72
+outline_size = 1
+font_data = ExtResource( 7 )
+
+[sub_resource type="InputEventAction" id=4]
+action = "ui_accept"
+
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -20,16 +36,6 @@ shader_param/Shift_Hue = 0.616
 shader_param/Shift_Sat = 0.223
 shader_param/Shift_Val = 0.257
 
-[sub_resource type="DynamicFont" id=3]
-outline_size = 1
-font_data = ExtResource( 7 )
-
-[sub_resource type="InputEventAction" id=4]
-action = "ui_accept"
-
-[sub_resource type="ShortCut" id=5]
-shortcut = SubResource( 4 )
-
 [node name="join_game" type="Node2D"]
 script = ExtResource( 5 )
 
@@ -37,50 +43,29 @@ script = ExtResource( 5 )
 script = ExtResource( 6 )
 player_id = 1
 
-[node name="background2" type="Sprite" parent="."]
-material = SubResource( 1 )
-position = Vector2( 0, -4.194 )
-scale = Vector2( 1.13665, 0.940339 )
-texture = ExtResource( 2 )
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="background3" type="Sprite" parent="."]
-material = SubResource( 2 )
-position = Vector2( 0.84332, 0.978562 )
-scale = Vector2( 0.751, 0.751 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="background4" type="Sprite" parent="."]
-position = Vector2( 0, -3.17024 )
-scale = Vector2( 0.831059, 0.870687 )
-texture = ExtResource( 3 )
-
-[node name="camera" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.2, 0.2 )
-
-[node name="game_id" type="LineEdit" parent="."]
-anchor_left = 0.5
+[node name="game_id" type="LineEdit" parent="GUI"]
+anchor_left = 0.1
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.9
 anchor_bottom = 0.5
-margin_left = -63.0
-margin_top = -18.0
-margin_right = 64.0
-margin_bottom = 17.0
-text = "1234ABCD"
+margin_top = -12.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 6 )
 align = 1
+placeholder_text = "Enter code..."
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="join_button" type="Button" parent="."]
-margin_left = -50.3988
-margin_top = 21.1429
-margin_right = 49.6012
-margin_bottom = 43.1429
+[node name="join_button" type="Button" parent="GUI"]
+anchor_left = 0.1
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.7
+margin_top = -11.0
+margin_bottom = 11.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
 custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
@@ -92,4 +77,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="join_button" to="." method="_on_join_button_pressed"]
+[node name="background" type="Node2D" parent="."]
+scale = Vector2( 5, 5 )
+
+[node name="background2" type="Sprite" parent="background"]
+material = SubResource( 1 )
+position = Vector2( 0, -4.194 )
+scale = Vector2( 1.13665, 0.940339 )
+texture = ExtResource( 2 )
+
+[node name="background3" type="Sprite" parent="background"]
+material = SubResource( 2 )
+position = Vector2( 0.84332, 0.978562 )
+scale = Vector2( 0.751, 0.751 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="background4" type="Sprite" parent="background"]
+position = Vector2( 0, -3.17024 )
+scale = Vector2( 0.831059, 0.870687 )
+texture = ExtResource( 3 )
+
+[node name="camera" type="Camera2D" parent="."]
+current = true
+
+[connection signal="pressed" from="GUI/join_button" to="." method="_on_join_button_pressed"]
