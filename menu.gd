@@ -3,14 +3,14 @@ extends Node2D
 var map = {}
 
 func _ready():
-	map["p0_up"] = $w
-	map["p0_left"] = $a
-	map["p0_right"] = $d
-	map["p0_action"] = $s
-	map["p1_up"] = $up
-	map["p1_left"] = $left
-	map["p1_right"] = $right
-	map["p1_action"] = $down
+	map["p0_up"] = $static/p0/w
+	map["p0_left"] = $static/p0/a
+	map["p0_right"] = $static/p0/d
+	map["p0_action"] = $static/p0/s
+	map["p1_up"] = $static/p1/up
+	map["p1_left"] = $static/p1/left
+	map["p1_right"] = $static/p1/right
+	map["p1_action"] = $static/p1/down
 	
 func _on_play_button_pressed():
 	get_tree().change_scene("res://game.tscn")
