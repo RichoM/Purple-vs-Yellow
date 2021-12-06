@@ -46,6 +46,8 @@ func _on_projectile_shot(p):
 		
 		
 func _process(delta):
+	if Input.is_action_just_pressed("toggle_debug_info"):
+		debug_label.visible = !debug_label.visible
 	receive_incoming_messages()
 	call_deferred("send_outgoing_messages")
 	

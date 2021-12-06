@@ -199,6 +199,7 @@ volume_db = -5.0
 autoplay = true
 
 [node name="debug_label" type="Label" parent="."]
+visible = false
 margin_left = -727.066
 margin_top = -414.899
 margin_right = -687.066
