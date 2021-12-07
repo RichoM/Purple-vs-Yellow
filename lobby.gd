@@ -11,8 +11,6 @@ signal connection_failed(reason)
 
 func _ready():
 	init_event_handling()
-	if host:
-		start()
 	
 func _process(_delta):
 	# NOTE(Richo): Ignore packets until we start the game
@@ -28,6 +26,9 @@ func init_event_handling():
 
 func start():
 	client.start(Globals.server_url, game_id)
+	
+func stop():
+	client.stop()
 
 func _lobby_joined(lobby):
 	print("Joined lobby %s" % lobby)

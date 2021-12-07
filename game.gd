@@ -4,6 +4,8 @@ onready var client = Client
 onready var p0 = $player0
 onready var p1 = $player1
 onready var debug_label = $GUI/debug_label
+onready var error_panel = $GUI/error_panel
+onready var network_unstable = $GUI/network_unstable
 
 var game_over = false
 var player = null
@@ -12,6 +14,8 @@ var opponent = null
 var projectile_counter = 0
 var player_projectiles = {} # Projectile -> int (id)
 var opponent_projectiles = {} # int (id) -> Projectile 
+
+onready var last_msg_time = OS.get_ticks_msec()
 
 func _ready():
 	if Globals.player == 0:
@@ -48,16 +52,29 @@ func _on_projectile_shot(p):
 func _process(delta):
 	if Input.is_action_just_pressed("toggle_debug_info"):
 		debug_label.visible = !debug_label.visible
+		
+	if error_panel.visible: return
+	check_connection_health()
 	receive_incoming_messages()
 	call_deferred("send_outgoing_messages")
 	
+func check_connection_health():
+	var time_without_msg = OS.get_ticks_msec() - last_msg_time
+	if time_without_msg > 3000:
+		connection_error()
+	elif time_without_msg > 500:
+		connection_unstable()
+	else:
+		connection_reliable()
+		
 func receive_incoming_messages():
 	client.rtc_mp.poll()
-	
+		
 	while client.rtc_mp.get_available_packet_count() > 0:
 		var packet = null
 		packet = client.rtc_mp.get_packet()
 		if packet != null:
+			last_msg_time = OS.get_ticks_msec()
 			player.input_enabled = true
 			opponent.visible = true
 			var msg = packet.get_string_from_utf8()
@@ -118,13 +135,6 @@ func receive_incoming_messages():
 				if exploded:
 					projectile.explode()
 					opponent_projectiles.erase(id)
-			
-				#var t_stop = json["t"]
-				#var t_delta = 0.016
-				#var t = Globals.get_timestamp()
-				#while t < t_stop:
-				#	projectile._physics_process(t_delta)
-				#	t += t_delta
 		
 func send_outgoing_messages():
 	var player_data = {"x": player.global_position.x,
@@ -177,4 +187,18 @@ func winner(winner):
 	root.add_child(end_scene)
 
 func _on_back_button_pressed():
+	back()
+	
+func back():
 	get_tree().change_scene("res://menu.tscn")
+
+func connection_error():
+	game_over = true # no winner
+	error_panel.connect("closed", self, "back", [], CONNECT_ONESHOT)
+	error_panel.show_message("CONNECTION ERROR!\nReason: Player disconnected")
+	
+func connection_unstable():
+	network_unstable.visible = true
+
+func connection_reliable():
+	network_unstable.visible = false

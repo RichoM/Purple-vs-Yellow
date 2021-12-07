@@ -18,6 +18,9 @@ func join():
 	game_id.editable = false
 	lobby.game_id = game_id.text
 	lobby.start()
+	
+	yield(get_tree().create_timer(5), "timeout")
+	lobby.stop()
 
 func _on_game_id_text_changed(new_text):	
 	# Only uppercase

@@ -8,12 +8,8 @@
 [ext_resource path="res://music/DavidKBD - My Little Bots Pack - 01 - My little bots.ogg" type="AudioStream" id=6]
 [ext_resource path="res://player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://fonts/unicons.1.0.ttf" type="DynamicFontData" id=9]
-
-[sub_resource type="DynamicFont" id=5]
-size = 68
-outline_size = 2
-font_data = ExtResource( 9 )
+[ext_resource path="res://fonts/icon_font.tres" type="DynamicFont" id=9]
+[ext_resource path="res://error_panel.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=4]
 size = 18
@@ -49,7 +45,7 @@ custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
 custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = ExtResource( 9 )
 text = "<"
 flat = true
 align = 2
@@ -57,7 +53,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="network_unstable" type="Label" parent="GUI"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -78.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = 67.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 0.537255, 0, 1 )
+custom_fonts/font = ExtResource( 9 )
+text = "!"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="debug_label" type="Label" parent="GUI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 38.0
@@ -69,6 +83,8 @@ text = "42"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="error_panel" parent="GUI" instance=ExtResource( 10 )]
 
 [node name="background" type="Polygon2D" parent="."]
 position = Vector2( 128.058, -18.3527 )
