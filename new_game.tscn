@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://hue.gdshader" type="Shader" id=1]
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://lobby.gd" type="Script" id=6]
 [ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://fonts/unicons.1.0.ttf" type="DynamicFontData" id=9]
 
 [sub_resource type="DynamicFont" id=3]
 size = 72
@@ -18,6 +19,11 @@ size = 72
 outline_size = 3
 outline_color = Color( 0.278431, 0.384314, 0.682353, 1 )
 font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 68
+outline_size = 2
+font_data = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -71,6 +77,24 @@ margin_bottom = 43.5
 custom_fonts/font = SubResource( 4 )
 text = "Connecting..."
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_button" type="Button" parent="GUI"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 103.0
+margin_bottom = 73.0
+custom_colors/font_color_disabled = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "<"
+flat = true
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -11,9 +11,6 @@ func _ready():
 	map["p1_left"] = $static/p1/left
 	map["p1_right"] = $static/p1/right
 	map["p1_action"] = $static/p1/down
-	
-func _on_play_button_pressed():
-	get_tree().change_scene("res://game.tscn")
 
 func _process(_delta):
 	for key in map.keys():

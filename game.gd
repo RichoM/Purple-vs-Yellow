@@ -3,7 +3,7 @@ extends Node2D
 onready var client = Client
 onready var p0 = $player0
 onready var p1 = $player1
-onready var debug_label = $debug_label
+onready var debug_label = $GUI/debug_label
 
 var game_over = false
 var player = null

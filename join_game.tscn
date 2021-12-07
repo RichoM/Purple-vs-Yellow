@@ -7,14 +7,10 @@
 [ext_resource path="res://join_game.gd" type="Script" id=5]
 [ext_resource path="res://lobby.gd" type="Script" id=6]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://fonts/button_font.tres" type="DynamicFont" id=8]
 
 [sub_resource type="DynamicFont" id=6]
 size = 72
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 72
-outline_size = 2
 font_data = ExtResource( 7 )
 
 [sub_resource type="InputEventAction" id=4]
@@ -68,7 +64,7 @@ margin_bottom = 11.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
 custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = ExtResource( 8 )
 shortcut = SubResource( 5 )
 text = "JOIN"
 flat = true

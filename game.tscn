@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://planets/planets.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
@@ -8,6 +8,16 @@
 [ext_resource path="res://music/DavidKBD - My Little Bots Pack - 01 - My little bots.ogg" type="AudioStream" id=6]
 [ext_resource path="res://player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://fonts/unicons.1.0.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=5]
+size = 68
+outline_size = 2
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 18
+font_data = ExtResource( 8 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -24,12 +34,41 @@ shader_param/Shift_Hue = -0.428
 shader_param/Shift_Sat = null
 shader_param/Shift_Val = null
 
-[sub_resource type="DynamicFont" id=4]
-size = 33
-font_data = ExtResource( 8 )
-
 [node name="game" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="back_button" type="Button" parent="GUI"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 103.0
+margin_bottom = 73.0
+custom_colors/font_color_disabled = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "<"
+flat = true
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug_label" type="Label" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 38.0
+margin_top = 88.0
+margin_right = -38.0
+margin_bottom = -38.0
+custom_fonts/font = SubResource( 4 )
+text = "42"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="background" type="Polygon2D" parent="."]
 position = Vector2( 128.058, -18.3527 )
@@ -197,18 +236,6 @@ material = SubResource( 3 )
 stream = ExtResource( 6 )
 volume_db = -5.0
 autoplay = true
-
-[node name="debug_label" type="Label" parent="."]
-visible = false
-margin_left = -727.066
-margin_top = -414.899
-margin_right = -687.066
-margin_bottom = -400.899
-custom_fonts/font = SubResource( 4 )
-text = "42"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="tree_exited" from="player0" to="." method="_on_player0_tree_exited"]
 [connection signal="tree_exited" from="player1" to="." method="_on_player1_tree_exited"]
