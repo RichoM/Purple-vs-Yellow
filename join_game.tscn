@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://hue.gdshader" type="Shader" id=1]
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
@@ -7,11 +7,10 @@
 [ext_resource path="res://join_game.gd" type="Script" id=5]
 [ext_resource path="res://lobby.gd" type="Script" id=6]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=6]
 size = 72
-font_data = ExtResource( 8 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 72
@@ -103,4 +102,6 @@ texture = ExtResource( 3 )
 [node name="camera" type="Camera2D" parent="."]
 current = true
 
+[connection signal="text_changed" from="GUI/game_id" to="." method="_on_game_id_text_changed"]
+[connection signal="text_entered" from="GUI/game_id" to="." method="_on_game_id_text_entered"]
 [connection signal="pressed" from="GUI/join_button" to="." method="_on_join_button_pressed"]
