@@ -43,6 +43,7 @@ Globals="*res://globals.gd"
 
 [display]
 
+window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="keep_height"
 
