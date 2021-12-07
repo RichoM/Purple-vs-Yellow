@@ -13,3 +13,7 @@ func _on_timer_timeout():
 	game_id.clear()
 	for i in 3:
 		game_id.text += "." if i <= count else " "
+
+
+func _on_back_button_pressed():
+	get_tree().change_scene("res://menu.tscn")

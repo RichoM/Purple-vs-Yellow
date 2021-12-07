@@ -176,3 +176,5 @@ func winner(winner):
 	end_scene.winner = winner
 	root.add_child(end_scene)
 
+func _on_back_button_pressed():
+	get_tree().change_scene("res://menu.tscn")

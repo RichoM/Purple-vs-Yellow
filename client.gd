@@ -213,6 +213,7 @@ func peer_connected(id):
 
 
 func peer_disconnected(id):
+	print("Peer disconnected %d" % id)
 	if rtc_mp.has_peer(id): rtc_mp.remove_peer(id)
 
 
@@ -229,5 +230,6 @@ func answer_received(id, answer):
 
 
 func candidate_received(id, mid, index, sdp):
+	print("Candidate received from %d (%s)" % [id, str(sdp)])
 	if rtc_mp.has_peer(id):
 		rtc_mp.get_peer(id).connection.add_ice_candidate(mid, index, sdp)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://hue.gdshader" type="Shader" id=1]
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
@@ -8,6 +8,15 @@
 [ext_resource path="res://lobby.gd" type="Script" id=6]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://fonts/button_font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://fonts/unicons.1.0.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://error_panel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=11]
+
+[sub_resource type="DynamicFont" id=8]
+size = 72
+outline_size = 3
+outline_color = Color( 0.278431, 0.384314, 0.682353, 1 )
+font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 72
@@ -18,6 +27,11 @@ action = "ui_accept"
 
 [sub_resource type="ShortCut" id=5]
 shortcut = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 68
+outline_size = 2
+font_data = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -40,16 +54,30 @@ player_id = 1
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
+[node name="label" type="Label" parent="GUI"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -43.5
+margin_bottom = 43.5
+custom_fonts/font = SubResource( 8 )
+text = "Enter code:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="game_id" type="LineEdit" parent="GUI"]
 anchor_left = 0.1
 anchor_top = 0.5
 anchor_right = 0.9
 anchor_bottom = 0.5
-margin_top = -12.0
-margin_bottom = 12.0
+margin_top = -41.0
+margin_bottom = 41.0
 custom_fonts/font = SubResource( 6 )
 align = 1
-placeholder_text = "Enter code..."
+context_menu_enabled = false
+placeholder_text = "####"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -65,12 +93,35 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
 custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
 custom_fonts/font = ExtResource( 8 )
+disabled = true
+shortcut_in_tooltip = false
 shortcut = SubResource( 5 )
 text = "JOIN"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="back_button" type="Button" parent="GUI"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 103.0
+margin_bottom = 73.0
+custom_colors/font_color_disabled = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "<"
+flat = true
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="error_panel" parent="GUI" instance=ExtResource( 10 )]
+visible = false
 
 [node name="background" type="Node2D" parent="."]
 scale = Vector2( 5, 5 )
@@ -98,6 +149,9 @@ texture = ExtResource( 3 )
 [node name="camera" type="Camera2D" parent="."]
 current = true
 
+[connection signal="connection_failed" from="lobby" to="." method="_on_lobby_connection_failed"]
 [connection signal="text_changed" from="GUI/game_id" to="." method="_on_game_id_text_changed"]
 [connection signal="text_entered" from="GUI/game_id" to="." method="_on_game_id_text_entered"]
 [connection signal="pressed" from="GUI/join_button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="GUI/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="closed" from="GUI/error_panel" to="." method="_on_error_panel_closed"]

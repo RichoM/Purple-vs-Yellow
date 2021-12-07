@@ -165,6 +165,7 @@ position = Vector2( 55, 0 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
 animation = "alive"
+frame = 1
 playing = true
 flip_h = true
 

@@ -237,6 +237,7 @@ stream = ExtResource( 6 )
 volume_db = -5.0
 autoplay = true
 
+[connection signal="pressed" from="GUI/back_button" to="." method="_on_back_button_pressed"]
 [connection signal="tree_exited" from="player0" to="." method="_on_player0_tree_exited"]
 [connection signal="tree_exited" from="player1" to="." method="_on_player1_tree_exited"]
 
