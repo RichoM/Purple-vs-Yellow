@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://error_panel.gd" type="Script" id=2]
 [ext_resource path="res://fonts/unicons.1.0.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=10]
+size = 110
+use_filter = true
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 32
@@ -23,17 +28,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="icon" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -59.0
+margin_top = -45.0
+margin_right = 80.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 10 )
+text = "!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="msg" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 38.0
-margin_top = 109.0
-margin_right = -38.0
-margin_bottom = -110.0
+margin_bottom = -345.0
 custom_fonts/font = SubResource( 8 )
 text = "ERROR
 Something happened!"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
