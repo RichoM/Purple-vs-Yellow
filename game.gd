@@ -6,6 +6,7 @@ onready var p1 = $player1
 onready var debug_label = $GUI/debug_label
 onready var error_panel = $GUI/error_panel
 onready var network_unstable = $GUI/network_unstable
+onready var waiting = $GUI/waiting
 
 var game_over = false
 var player = null
@@ -15,7 +16,7 @@ var projectile_counter = 0
 var player_projectiles = {} # Projectile -> int (id)
 var opponent_projectiles = {} # int (id) -> Projectile 
 
-onready var last_msg_time = OS.get_ticks_msec()
+onready var last_msg_time = null
 
 func _ready():
 	if Globals.player == 0:
@@ -42,6 +43,11 @@ func _ready():
 		planet.scale = Vector2.ONE * rand_range(1, 4.5)
 		
 	player.connect("projectile_shot", self, "_on_projectile_shot")
+	
+	waiting.visible = false
+	yield(get_tree().create_timer(0.25), "timeout")
+	if last_msg_time == null:
+		waiting.visible = true
 
 func _on_projectile_shot(p):
 	if not player_projectiles.has(p):
@@ -59,6 +65,7 @@ func _process(delta):
 	call_deferred("send_outgoing_messages")
 	
 func check_connection_health():
+	if last_msg_time == null: return
 	var time_without_msg = OS.get_ticks_msec() - last_msg_time
 	if time_without_msg > 3000:
 		connection_error()
@@ -74,6 +81,7 @@ func receive_incoming_messages():
 		var packet = null
 		packet = client.rtc_mp.get_packet()
 		if packet != null:
+			waiting.visible = false
 			last_msg_time = OS.get_ticks_msec()
 			player.input_enabled = true
 			opponent.visible = true
