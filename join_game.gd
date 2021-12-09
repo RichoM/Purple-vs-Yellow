@@ -43,7 +43,8 @@ func _on_back_button_pressed():
 	get_tree().change_scene("res://menu.tscn")
 
 func _on_lobby_connection_failed(reason):
-	error_panel.show_message("CONNECTION FAILED!\nReason: %s" % reason)
+	if reason.empty(): reason = "Unknown"
+	error_panel.show_message("CONNECTION FAILED!", "Reason: %s" % reason)
 
 func _on_error_panel_closed():
 	get_tree().reload_current_scene()
