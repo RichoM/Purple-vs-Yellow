@@ -22,6 +22,13 @@ func _process(delta):
 	client.rtc_mp.poll()
 	while client.rtc_mp.get_available_packet_count() > 0:
 		var packet = client.rtc_mp.get_packet()
+	
+	# Send a keep alive packet
+	var data = {"t": Globals.get_timestamp()}
+	var msg = JSON.print(data)
+	if client.rtc_mp.put_packet(msg.to_utf8()) != 0:
+		# TODO(Richo): Handle errors
+		print("ERROR!")
 
 func _on_play_button_pressed():
 	get_tree().change_scene("res://game.tscn")

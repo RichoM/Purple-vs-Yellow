@@ -92,9 +92,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="error_panel" parent="GUI" instance=ExtResource( 10 )]
-visible = false
-
 [node name="waiting" type="Label" parent="GUI"]
 visible = false
 anchor_right = 1.0
@@ -107,6 +104,9 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="error_panel" parent="GUI" instance=ExtResource( 10 )]
+visible = false
 
 [node name="background" type="Polygon2D" parent="."]
 position = Vector2( 128.058, -18.3527 )

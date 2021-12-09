@@ -16,7 +16,8 @@ var projectile_counter = 0
 var player_projectiles = {} # Projectile -> int (id)
 var opponent_projectiles = {} # int (id) -> Projectile 
 
-onready var last_msg_time = null
+onready var last_msg_time = OS.get_ticks_msec()
+var network_unstable_counter = 0
 
 func _ready():
 	if Globals.player == 0:
@@ -46,7 +47,7 @@ func _ready():
 	
 	waiting.visible = false
 	yield(get_tree().create_timer(0.25), "timeout")
-	if last_msg_time == null:
+	if not opponent.visible:
 		waiting.visible = true
 
 func _on_projectile_shot(p):
@@ -63,7 +64,7 @@ func _process(delta):
 	check_connection_health()
 	receive_incoming_messages()
 	call_deferred("send_outgoing_messages")
-	
+
 func check_connection_health():
 	if last_msg_time == null: return
 	var time_without_msg = OS.get_ticks_msec() - last_msg_time
@@ -81,10 +82,7 @@ func receive_incoming_messages():
 		var packet = null
 		packet = client.rtc_mp.get_packet()
 		if packet != null:
-			waiting.visible = false
 			last_msg_time = OS.get_ticks_msec()
-			player.input_enabled = true
-			opponent.visible = true
 			var msg = packet.get_string_from_utf8()
 			var json = JSON.parse(msg).result
 			
@@ -100,49 +98,54 @@ func receive_incoming_messages():
 								t_opponent, 
 								t_diff]
 			
-			var player_data = json["player"]
-			opponent.global_position = Vector2(player_data["x"], player_data["y"])
-			opponent.global_rotation = player_data["r"]
-			if player_data["facing_right"]:
-				opponent.face_right()
-			else:
-				opponent.face_left()
-			opponent.sprite.play(player_data["animation"])
-			if player_data["aiming"] != null:
-				if not opponent.rocket_launcher.visible:
-					opponent.rocket_launcher.rotation = player_data["aiming"]
-					opponent.rocket_launcher.visible = true
-			else:
-				opponent.rocket_launcher.visible = false
-			if player_data["dead"] and not opponent.dead:
-				opponent.die()
-				print("OPPONENT DEAD")
-			var projectile_data = json["projectiles"]
+			if json.has("player"):
+				var player_data = json["player"]
+				waiting.visible = false
+				player.input_enabled = true
+				opponent.visible = true
 			
-			for id in opponent_projectiles.keys():
-				if not projectile_data.has(id):
-					opponent_projectiles[id].explode()
-					opponent_projectiles.erase(id)
-					
-			for id in projectile_data.keys():
-				var p = projectile_data[id]
-				var pos = Vector2(p["x"], p["y"])
-				var vel = Vector2(p["v"]["x"], p["v"]["y"])
-				var exploded = p["exploded"]
-				var projectile = null
-				
-				if opponent_projectiles.has(id):
-					projectile = opponent_projectiles[id]
-					projectile.global_position = pos
-					projectile.velocity = vel
+				opponent.global_position = Vector2(player_data["x"], player_data["y"])
+				opponent.global_rotation = player_data["r"]
+				if player_data["facing_right"]:
+					opponent.face_right()
 				else:
-					projectile = opponent.rocket_launcher.shoot_at(pos, vel)
-					opponent_projectiles[id] = projectile
-					projectile.is_local = false
+					opponent.face_left()
+				opponent.sprite.play(player_data["animation"])
+				if player_data["aiming"] != null:
+					if not opponent.rocket_launcher.visible:
+						opponent.rocket_launcher.rotation = player_data["aiming"]
+						opponent.rocket_launcher.visible = true
+				else:
+					opponent.rocket_launcher.visible = false
+				if player_data["dead"] and not opponent.dead:
+					opponent.die()
+					print("OPPONENT DEAD")
+				var projectile_data = json["projectiles"]
 				
-				if exploded:
-					projectile.explode()
-					opponent_projectiles.erase(id)
+				for id in opponent_projectiles.keys():
+					if not projectile_data.has(id):
+						opponent_projectiles[id].explode()
+						opponent_projectiles.erase(id)
+						
+				for id in projectile_data.keys():
+					var p = projectile_data[id]
+					var pos = Vector2(p["x"], p["y"])
+					var vel = Vector2(p["v"]["x"], p["v"]["y"])
+					var exploded = p["exploded"]
+					var projectile = null
+					
+					if opponent_projectiles.has(id):
+						projectile = opponent_projectiles[id]
+						projectile.global_position = pos
+						projectile.velocity = vel
+					else:
+						projectile = opponent.rocket_launcher.shoot_at(pos, vel)
+						opponent_projectiles[id] = projectile
+						projectile.is_local = false
+					
+					if exploded:
+						projectile.explode()
+						opponent_projectiles.erase(id)
 		
 func send_outgoing_messages():
 	var player_data = {"x": player.global_position.x,
@@ -203,10 +206,13 @@ func back():
 func connection_error():
 	game_over = true # no winner
 	error_panel.connect("closed", self, "back", [], CONNECT_ONESHOT)
-	error_panel.show_message("CONNECTION ERROR!\nReason: Player disconnected")
+	error_panel.show_message("CONNECTION ERROR!", "Reason: Player disconnected")
 	
 func connection_unstable():
-	network_unstable.visible = true
+	network_unstable_counter += 1
+	if network_unstable_counter >= 10:
+		network_unstable.visible = true
 
 func connection_reliable():
+	network_unstable_counter = 0
 	network_unstable.visible = false
