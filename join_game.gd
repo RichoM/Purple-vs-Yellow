@@ -5,6 +5,23 @@ onready var game_id = $GUI/game_id
 onready var join_button = $GUI/join_button
 onready var error_panel = $GUI/error_panel
 
+# HACK(Richo): We can't handle the textchanged event because the 
+# experimental virtual keyboard doesn't support it so instead we
+# just check the value on the process event
+onready var previous_game_id = game_id.text
+
+func _process(delta):
+	if game_id.text != previous_game_id:
+		# Only uppercase
+		var pos = game_id.caret_position
+		game_id.text = game_id.text.to_upper()
+		game_id.caret_position = pos
+		
+		# Enable join button if not empty
+		join_button.disabled = game_id.text.empty()
+		
+		previous_game_id = game_id.text
+
 func _on_join_button_pressed():
 	join()
 
@@ -21,15 +38,6 @@ func join():
 	
 	yield(get_tree().create_timer(5), "timeout")
 	lobby.stop()
-
-func _on_game_id_text_changed(new_text):	
-	# Only uppercase
-	var pos = game_id.caret_position
-	game_id.text = new_text.to_upper()
-	game_id.caret_position = pos
-	
-	# Enable join button if not empty
-	join_button.disabled = game_id.text.empty()
 
 func _on_back_button_pressed():
 	get_tree().change_scene("res://menu.tscn")
