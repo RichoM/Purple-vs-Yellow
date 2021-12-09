@@ -36,6 +36,9 @@ func _ready():
 	opponent.visible = false
 	opponent.input_enabled = false
 	
+	for touch_btn in $touch.get_children():
+		touch_btn.visible = OS.has_touchscreen_ui_hint()
+	
 	Globals.level = Globals.level + 1
 	seed(Globals.level)
 	for planet in $planets.get_children():
