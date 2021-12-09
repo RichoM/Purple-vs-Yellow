@@ -10,8 +10,9 @@ func _ready():
 func _on_close_button_pressed():
 	close()
 	
-func show_message(msg):
-	label.text = msg
+func show_message(title, msg = ""):
+	label.text = title
+	if not msg.empty(): label.text += "\n" + msg
 	visible = true
 
 func close():
