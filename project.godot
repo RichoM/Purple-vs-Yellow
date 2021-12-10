@@ -34,7 +34,7 @@ _global_script_class_icons={
 
 config/name="Purple vs Yellow"
 run/main_scene="res://menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://icon/icon.png"
 
 [autoload]
 
