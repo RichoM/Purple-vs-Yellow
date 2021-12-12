@@ -1,0 +1,158 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://test/test_ws.gd" type="Script" id=1]
+[ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[node name="test_ws" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="Panel" parent="."]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+
+[node name="buttons" type="HBoxContainer" parent="left"]
+anchor_right = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = 47.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="connect" type="Button" parent="left/buttons"]
+margin_left = 81.0
+margin_right = 191.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "Connect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="disconnect" type="Button" parent="left/buttons"]
+margin_left = 195.0
+margin_right = 347.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "Disconnect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ping" type="Button" parent="left/buttons"]
+margin_left = 351.0
+margin_right = 419.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "Ping"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="data" type="ScrollContainer" parent="left"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 50.0
+margin_right = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="left/data"]
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="right" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buttons" type="HBoxContainer" parent="right"]
+anchor_right = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = 47.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="connect" type="Button" parent="right/buttons"]
+margin_left = 81.0
+margin_right = 191.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "Connect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="disconnect" type="Button" parent="right/buttons"]
+margin_left = 195.0
+margin_right = 347.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "Disconnect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ping" type="Button" parent="right/buttons"]
+margin_left = 351.0
+margin_right = 419.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "Ping"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="data" type="ScrollContainer" parent="right"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 50.0
+margin_right = -5.0
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="label" type="Label" parent="right/data"]
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 2 )
+
+[connection signal="pressed" from="left/buttons/connect" to="." method="_on_connect_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="left/buttons/disconnect" to="." method="_on_disconnect_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="left/buttons/ping" to="." method="_on_ping_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="right/buttons/connect" to="." method="_on_connect_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="right/buttons/disconnect" to="." method="_on_disconnect_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="right/buttons/ping" to="." method="_on_ping_pressed" binds= [ 1 ]]
