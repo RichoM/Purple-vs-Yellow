@@ -1,6 +1,6 @@
 # Purple-vs-Yellow
 
-A two player game I made for the [STOP WAITING FOR GODOT](https://itch.io/jam/stop-waiting-for-godot) jam. You can [play it on itch.io](https://richo.itch.io/purple-vs-yellow).
+A two player game I made for the [STOP WAITING FOR GODOT](https://itch.io/jam/stop-waiting-for-godot) jam. I later added online multiplayer support using WebRTC. You can [play it on itch.io](https://richo.itch.io/purple-vs-yellow).
 
 It's inspired by [Sagittarius](https://gprosser.itch.io/sagittarius) by George Prosser.
 
@@ -16,3 +16,5 @@ It's inspired by [Sagittarius](https://gprosser.itch.io/sagittarius) by George P
 - Lose sfx: Created using [Chiptone](https://sfbgames.itch.io/chiptone)
 - Fonts: [CATV 6X12 9](https://fontlibrary.org/en/font/catv-6x12-9) by HolyBlackCat 
 - Fonts: [Tomorrow](https://fontlibrary.org/en/font/tomorrow) by Tony de Marco and Monica Rizzolli
+- Fonts [UniCons](https://fontlibrary.org/en/font/unicons) by Juergen Krausz
+- Touch screen icons by [Paul Wortmann](https://opengameart.org/content/buttons-for-touch-screen-display)
