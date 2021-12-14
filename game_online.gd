@@ -20,6 +20,9 @@ onready var last_msg_time = OS.get_ticks_msec()
 var network_unstable_counter = 0
 
 func _ready():
+	OS.hide_virtual_keyboard()
+	Globals.mode = Globals.ONLINE_MULTIPLAYER
+	
 	if Globals.player == 0:
 		player = p0
 		opponent = p1
@@ -198,6 +201,7 @@ func winner(winner):
 	# Add end scene
 	var end_scene = preload("res://end.tscn").instance()
 	end_scene.winner = winner
+	end_scene.return_scene = "res://game_online.tscn"
 	root.add_child(end_scene)
 
 func _on_back_button_pressed():

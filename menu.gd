@@ -3,6 +3,7 @@ extends Node2D
 var map = {}
 
 func _ready():
+	randomize()
 	map["p0_up"] = $static/p0/w
 	map["p0_left"] = $static/p0/a
 	map["p0_right"] = $static/p0/d
@@ -24,10 +25,22 @@ func _process(_delta):
 			sprite.animation = "released"
 			sprite.frame = frame
 
-
 func _on_new_game_button_pressed():
 	get_tree().change_scene("res://new_game.tscn")
 
-
 func _on_join_game_button_pressed():
 	get_tree().change_scene("res://join_game.tscn")
+
+func _on_local_multiplayer_button_pressed():
+	get_tree().change_scene("res://game_local.tscn")
+
+func _on_online_multiplayer_button_pressed():
+	$GUI/level_0.visible = false
+	$GUI/level_1.visible = true
+
+func _on_back_button_pressed():
+	$GUI/level_0.visible = true
+	$GUI/level_1.visible = false
+
+func _on_quit_button_pressed():
+	get_tree().quit()

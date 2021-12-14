@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://pixel-line-platformer/dead.png" type="Texture" id=1]
 [ext_resource path="res://pixel-line-platformer/Tilemap/tilemap_packed.png" type="Texture" id=2]
@@ -10,6 +10,29 @@
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=9]
 [ext_resource path="res://space_background_pack/layers/parallax-space-far-planets.png" type="Texture" id=10]
 [ext_resource path="res://space_background_pack/layers/parallax-space-stars.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=9]
+size = 125
+outline_size = 3
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 88
+outline_size = 3
+outline_color = Color( 0, 0.533333, 0.87451, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 45
+outline_size = 2
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 26
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -39,14 +62,14 @@ region = Rect2( 16, 64, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "dead",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "alive",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "dead",
 "speed": 5.0
 } ]
 
@@ -61,24 +84,175 @@ shader_param/Shift_Hue = -0.428
 shader_param/Shift_Sat = null
 shader_param/Shift_Val = null
 
-[sub_resource type="DynamicFont" id=9]
-size = 125
-outline_size = 3
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 88
-outline_size = 3
-outline_color = Color( 0, 0.533333, 0.87451, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=11]
-size = 56
-outline_size = 2
-font_data = ExtResource( 6 )
-
 [node name="menu" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="purple" type="Label" parent="GUI"]
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( 20, 16 )
+custom_colors/font_color = Color( 0.709804, 0, 0.407843, 1 )
+custom_fonts/font = SubResource( 9 )
+text = "Purple"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vs" type="Label" parent="GUI"]
+anchor_left = 0.5
+anchor_top = 0.164
+anchor_right = 0.5
+anchor_bottom = 0.198
+margin_left = -47.5
+margin_right = 47.5
+margin_bottom = 101.0
+rect_pivot_offset = Vector2( 20, 16 )
+custom_fonts/font = SubResource( 8 )
+text = "vs"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="yellow" type="Label" parent="GUI"]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( 20, 16 )
+custom_colors/font_color = Color( 1, 0.713726, 0, 1 )
+custom_fonts/font = SubResource( 9 )
+text = "Yellow"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_0" type="VBoxContainer" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 340.0
+margin_top = 219.0
+margin_right = -340.0
+margin_bottom = -116.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="local_multiplayer_button" type="Button" parent="GUI/level_0"]
+margin_top = 78.0
+margin_right = 344.0
+margin_bottom = 130.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "LOCAL GAME"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="online_multiplayer_button" type="Button" parent="GUI/level_0"]
+margin_top = 134.0
+margin_right = 344.0
+margin_bottom = 186.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "ONLINE GAME"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit_button" type="Button" parent="GUI/level_0"]
+visible = false
+margin_top = 162.0
+margin_right = 434.0
+margin_bottom = 214.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "QUIT"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_1" type="VBoxContainer" parent="GUI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 336.0
+margin_top = 180.0
+margin_right = -337.0
+margin_bottom = -102.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="GUI/level_1"]
+margin_top = 61.0
+margin_right = 351.0
+margin_bottom = 88.0
+custom_colors/font_color = Color( 0.458824, 0.458824, 0.458824, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "-ONLINE GAME-"
+align = 1
+
+[node name="new_game_button" type="Button" parent="GUI/level_1"]
+margin_top = 92.0
+margin_right = 351.0
+margin_bottom = 144.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "NEW MATCH"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join_game_button" type="Button" parent="GUI/level_1"]
+margin_top = 148.0
+margin_right = 351.0
+margin_bottom = 200.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "JOIN MATCH"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_button" type="Button" parent="GUI/level_1"]
+margin_top = 204.0
+margin_right = 351.0
+margin_bottom = 256.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "< BACK"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="static" type="Node2D" parent="."]
 scale = Vector2( 5, 5 )
@@ -285,90 +459,9 @@ scale = Vector2( 5, 5 )
 [node name="camera" type="Camera2D" parent="."]
 current = true
 
-[node name="GUI" type="CanvasLayer" parent="."]
-
-[node name="purple" type="Label" parent="GUI"]
-anchor_top = 0.1
-anchor_right = 0.5
-anchor_bottom = 0.1
-margin_bottom = 120.0
-rect_pivot_offset = Vector2( 20, 16 )
-custom_colors/font_color = Color( 0.709804, 0, 0.407843, 1 )
-custom_fonts/font = SubResource( 9 )
-text = "Purple"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="vs" type="Label" parent="GUI"]
-anchor_left = 0.5
-anchor_top = 0.164
-anchor_right = 0.5
-anchor_bottom = 0.198
-margin_left = -47.5
-margin_right = 47.5
-margin_bottom = 101.0
-rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 8 )
-text = "vs"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="yellow" type="Label" parent="GUI"]
-anchor_left = 0.5
-anchor_top = 0.1
-anchor_right = 1.0
-anchor_bottom = 0.1
-margin_bottom = 120.0
-rect_pivot_offset = Vector2( 20, 16 )
-custom_colors/font_color = Color( 1, 0.713726, 0, 1 )
-custom_fonts/font = SubResource( 9 )
-text = "Yellow"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="new_game_button" type="Button" parent="GUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -184.0
-margin_top = -15.251
-margin_right = 184.0
-margin_bottom = 46.749
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
-custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
-custom_fonts/font = SubResource( 11 )
-text = "NEW GAME"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="join_game_button" type="Button" parent="GUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -184.0
-margin_top = 48.375
-margin_right = 184.0
-margin_bottom = 110.375
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
-custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
-custom_fonts/font = SubResource( 11 )
-text = "JOIN GAME"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="GUI/new_game_button" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="GUI/join_game_button" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="GUI/level_0/local_multiplayer_button" to="." method="_on_local_multiplayer_button_pressed"]
+[connection signal="pressed" from="GUI/level_0/online_multiplayer_button" to="." method="_on_online_multiplayer_button_pressed"]
+[connection signal="pressed" from="GUI/level_0/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="GUI/level_1/new_game_button" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="GUI/level_1/join_game_button" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="GUI/level_1/back_button" to="." method="_on_back_button_pressed"]

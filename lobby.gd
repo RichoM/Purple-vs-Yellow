@@ -40,7 +40,7 @@ func _lobby_sealed():
 	Globals.level = game_id.hash()
 	Globals.player = player_id
 	Globals.reset_timestamp()
-	get_tree().change_scene("res://game.tscn")
+	get_tree().change_scene("res://game_online.tscn")
 	
 func _disconnected():
 	emit_signal("connection_failed", client.reason)
