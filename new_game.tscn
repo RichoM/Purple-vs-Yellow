@@ -1,0 +1,131 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://hue.gdshader" type="Shader" id=1]
+[ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
+[ext_resource path="res://space_background_pack/layers/parallax-space-far-planets.png" type="Texture" id=3]
+[ext_resource path="res://space_background_pack/layers/parallax-space-stars.png" type="Texture" id=4]
+[ext_resource path="res://new_game.gd" type="Script" id=5]
+[ext_resource path="res://lobby.gd" type="Script" id=6]
+[ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://fonts/icon_font.tres" type="DynamicFont" id=9]
+[ext_resource path="res://error_panel.tscn" type="PackedScene" id=10]
+
+[sub_resource type="DynamicFont" id=3]
+size = 72
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 72
+outline_size = 3
+outline_color = Color( 0.278431, 0.384314, 0.682353, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/Shift_Hue = -0.514
+shader_param/Shift_Sat = 0.265
+shader_param/Shift_Val = -0.038
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/Shift_Hue = 0.616
+shader_param/Shift_Sat = 0.223
+shader_param/Shift_Val = 0.257
+
+[node name="new_game" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="lobby" type="Node" parent="."]
+script = ExtResource( 6 )
+host = true
+player_id = 0
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.75
+autostart = true
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="game_id" type="LineEdit" parent="GUI"]
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 0.9
+anchor_bottom = 0.5
+margin_left = -0.400002
+margin_top = -41.0
+margin_right = -0.599976
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 3 )
+text = "..."
+align = 1
+editable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="GUI"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -43.5
+margin_bottom = 43.5
+custom_fonts/font = SubResource( 4 )
+text = "Connecting..."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_button" type="Button" parent="GUI"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 103.0
+margin_bottom = 73.0
+custom_colors/font_color_disabled = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = ExtResource( 9 )
+text = "<"
+flat = true
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="error_panel" parent="GUI" instance=ExtResource( 10 )]
+visible = false
+
+[node name="background" type="Node2D" parent="."]
+scale = Vector2( 5, 5 )
+
+[node name="background2" type="Sprite" parent="background"]
+material = SubResource( 1 )
+position = Vector2( 0, -4.194 )
+scale = Vector2( 1.13665, 0.940339 )
+texture = ExtResource( 2 )
+
+[node name="background3" type="Sprite" parent="background"]
+material = SubResource( 2 )
+position = Vector2( 0.84332, 0.978562 )
+scale = Vector2( 0.751, 0.751 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="background4" type="Sprite" parent="background"]
+position = Vector2( 0, -3.17024 )
+scale = Vector2( 0.831059, 0.870687 )
+texture = ExtResource( 3 )
+
+[node name="camera" type="Camera2D" parent="."]
+current = true
+
+[connection signal="connection_failed" from="lobby" to="." method="_on_lobby_connection_failed"]
+[connection signal="lobby_joined" from="lobby" to="." method="_on_lobby_joined"]
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="GUI/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="closed" from="GUI/error_panel" to="." method="_on_error_panel_closed"]

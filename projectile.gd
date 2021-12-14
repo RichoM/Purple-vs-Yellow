@@ -2,13 +2,15 @@ extends Node2D
 class_name Projectile
 
 var velocity = Vector2()
+var exploded = false
+var is_local = true
 
 onready var explosion_range = $explosion_range
 onready var radius = $gravity_range/shape.shape.radius
 
 var attractors_in_range = []
 
-func _process(delta):
+func _physics_process(delta):
 	#apply_attractor(get_global_mouse_position(), 10, delta)
 	for attractor in attractors_in_range:
 		apply_attractor(attractor.position, attractor.scale.x, delta)
@@ -31,14 +33,17 @@ func _on_range_body_exited(body):
 	attractors_in_range.erase(body)
 
 func _on_collision_range_body_entered(body):
-	call_deferred("explode")
+	if not is_local: return
+	#call_deferred("explode")
+	exploded = true
 	
 func explode():
 	for body in explosion_range.get_overlapping_bodies():
-		body.die(position)
+		body.explode(position)
 	show_damage()
 	var parent = get_parent()
 	if parent: parent.remove_child(self)
+	#exploded = true
 	
 func show_damage():    
 	var explosion = explosion_range.get_node("explosion")

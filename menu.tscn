@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://pixel-line-platformer/dead.png" type="Texture" id=1]
 [ext_resource path="res://pixel-line-platformer/Tilemap/tilemap_packed.png" type="Texture" id=2]
@@ -7,10 +7,32 @@
 [ext_resource path="res://menu.gd" type="Script" id=5]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://keys.tres" type="SpriteFrames" id=7]
-[ext_resource path="res://planets/planets.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=9]
 [ext_resource path="res://space_background_pack/layers/parallax-space-far-planets.png" type="Texture" id=10]
 [ext_resource path="res://space_background_pack/layers/parallax-space-stars.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=9]
+size = 125
+outline_size = 3
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 88
+outline_size = 3
+outline_color = Color( 0, 0.533333, 0.87451, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 45
+outline_size = 2
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 26
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -51,94 +73,44 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="DynamicFont" id=10]
+size = 17
+outline_size = 1
+font_data = ExtResource( 6 )
+
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 3 )
 shader_param/Shift_Hue = -0.428
 shader_param/Shift_Sat = null
 shader_param/Shift_Val = null
 
-[sub_resource type="DynamicFont" id=8]
-size = 18
-outline_size = 1
-outline_color = Color( 0, 0.533333, 0.87451, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 24
-outline_size = 1
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=10]
-size = 17
-outline_size = 1
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=11]
-outline_size = 1
-font_data = ExtResource( 6 )
-
-[sub_resource type="InputEventAction" id=12]
-action = "ui_accept"
-
-[sub_resource type="ShortCut" id=13]
-shortcut = SubResource( 12 )
-
 [node name="menu" type="Node2D"]
-position = Vector2( 1000, 1000 )
 script = ExtResource( 5 )
 
-[node name="background" type="Sprite" parent="."]
-material = SubResource( 1 )
-position = Vector2( 0, -4.194 )
-scale = Vector2( 1.13665, 0.940339 )
-texture = ExtResource( 9 )
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="background2" type="Sprite" parent="."]
-material = SubResource( 2 )
-position = Vector2( 0.84332, 0.978562 )
-scale = Vector2( 0.751, 0.751 )
-texture = ExtResource( 11 )
+[node name="purple" type="Label" parent="GUI"]
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( 20, 16 )
+custom_colors/font_color = Color( 0.709804, 0, 0.407843, 1 )
+custom_fonts/font = SubResource( 9 )
+text = "Purple"
+align = 1
 __meta__ = {
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
 
-[node name="background3" type="Sprite" parent="."]
-position = Vector2( 0, -3.17024 )
-scale = Vector2( 0.831059, 0.870687 )
-texture = ExtResource( 10 )
-
-[node name="floor2" type="AnimatedSprite" parent="."]
-visible = false
-modulate = Color( 0.709804, 0.658824, 0.603922, 1 )
-position = Vector2( 2.88847, 80.2485 )
-scale = Vector2( 41.1912, 5.11854 )
-frames = ExtResource( 8 )
-
-[node name="p0" type="AnimatedSprite" parent="."]
-material = SubResource( 3 )
-position = Vector2( -49.7027, -0.859741 )
-scale = Vector2( 1.6, 1.75 )
-frames = SubResource( 6 )
-animation = "alive"
-
-[node name="p1" type="AnimatedSprite" parent="."]
-material = SubResource( 7 )
-position = Vector2( 50.2974, -0.859741 )
-scale = Vector2( 1.6, 1.75 )
-frames = SubResource( 6 )
-animation = "alive"
-flip_h = true
-
-[node name="camera" type="Camera2D" parent="."]
-position = Vector2( 0.222717, 0.668213 )
-current = true
-zoom = Vector2( 0.2, 0.2 )
-
-[node name="Label" type="Label" parent="."]
-margin_left = -19.093
-margin_top = -32.7998
-margin_right = 20.907
-margin_bottom = -0.799864
+[node name="vs" type="Label" parent="GUI"]
+anchor_left = 0.5
+anchor_top = 0.164
+anchor_right = 0.5
+anchor_bottom = 0.198
+margin_left = -47.5
+margin_right = 47.5
+margin_bottom = 101.0
 rect_pivot_offset = Vector2( 20, 16 )
 custom_fonts/font = SubResource( 8 )
 text = "vs"
@@ -147,213 +119,349 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="."]
-margin_left = -83.8945
-margin_top = -48.0525
-margin_right = -11.8945
-margin_bottom = -16.0525
+[node name="yellow" type="Label" parent="GUI"]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = 120.0
 rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 9 )
-custom_colors/font_color = Color( 0.709804, 0, 0.407843, 1 )
-text = "Purple"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="."]
-margin_left = 13.0181
-margin_top = -47.3583
-margin_right = 83.0181
-margin_bottom = -15.3583
-rect_pivot_offset = Vector2( 20, 16 )
-custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 0.713726, 0, 1 )
+custom_fonts/font = SubResource( 9 )
 text = "Yellow"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="w" type="AnimatedSprite" parent="."]
-position = Vector2( -49.3054, 27.6248 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-
-[node name="Label" type="Label" parent="w"]
-margin_left = -34.6606
-margin_top = -34.4407
-margin_right = 37.3394
-margin_bottom = -16.4407
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "JUMP/FLY"
+[node name="level_0" type="VBoxContainer" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 340.0
+margin_top = 219.0
+margin_right = -340.0
+margin_bottom = -116.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="a" type="AnimatedSprite" parent="."]
-position = Vector2( -58.2346, 35.8252 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-frame = 1
-
-[node name="Label" type="Label" parent="a"]
-margin_left = -97.7576
-margin_top = -8.38428
-margin_right = -16.7576
-margin_bottom = 9.61572
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "MOVE LEFT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="d" type="AnimatedSprite" parent="."]
-position = Vector2( -40.6738, 35.998 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-frame = 3
-
-[node name="Label" type="Label" parent="d"]
-margin_left = 20.7654
-margin_top = -7.85693
-margin_right = 84.7654
-margin_bottom = 8.14307
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "MOVE RIGHT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="s" type="AnimatedSprite" parent="."]
-position = Vector2( -49.2942, 35.9143 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-frame = 2
-
-[node name="Label" type="Label" parent="s"]
-margin_left = -38.3655
-margin_top = 30.2407
-margin_right = 42.6345
-margin_bottom = 48.2407
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "AIM/SHOOT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Line2D" type="Line2D" parent="s"]
-points = PoolVector2Array( -0.80127, 18.5166, -0.80127, 28.6304 )
-width = 2.0
-default_color = Color( 1, 1, 1, 1 )
-
-[node name="up" type="AnimatedSprite" parent="."]
-position = Vector2( 50.2908, 27.6248 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-frame = 4
-
-[node name="Label" type="Label" parent="up"]
-margin_left = -34.6606
-margin_top = -34.4407
-margin_right = 37.3394
-margin_bottom = -16.4407
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "JUMP/FLY"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="left" type="AnimatedSprite" parent="."]
-position = Vector2( 41.3616, 35.8252 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-frame = 7
-
-[node name="Label" type="Label" parent="left"]
-margin_left = -97.7576
-margin_top = -8.38428
-margin_right = -16.7576
-margin_bottom = 9.61572
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "MOVE LEFT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="right" type="AnimatedSprite" parent="."]
-position = Vector2( 58.9224, 35.998 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-frame = 6
-
-[node name="Label" type="Label" parent="right"]
-margin_left = 20.7654
-margin_top = -7.85693
-margin_right = 84.7654
-margin_bottom = 8.14307
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "MOVE RIGHT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="down" type="AnimatedSprite" parent="."]
-position = Vector2( 50.302, 35.9143 )
-scale = Vector2( 0.25, 0.25 )
-frames = ExtResource( 7 )
-animation = "released"
-frame = 5
-
-[node name="Label" type="Label" parent="down"]
-margin_left = -38.3655
-margin_top = 30.2407
-margin_right = 42.6345
-margin_bottom = 48.2407
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "AIM/SHOOT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Line2D" type="Line2D" parent="down"]
-points = PoolVector2Array( -0.80127, 18.5166, -0.80127, 28.6304 )
-width = 2.0
-default_color = Color( 1, 1, 1, 1 )
-
-[node name="press_enter" type="Node2D" parent="."]
-position = Vector2( 0.297302, 5.47046 )
-scale = Vector2( 0.55, 0.55 )
-
-[node name="play_button" type="Button" parent="press_enter"]
-margin_left = -47.7996
-margin_top = 11.1782
-margin_right = 52.2004
-margin_bottom = 33.1782
-custom_fonts/font = SubResource( 11 )
+[node name="local_multiplayer_button" type="Button" parent="GUI/level_0"]
+margin_top = 78.0
+margin_right = 344.0
+margin_bottom = 130.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
 custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
-shortcut = SubResource( 13 )
-text = "PRESS ENTER"
+custom_fonts/font = SubResource( 11 )
+text = "LOCAL GAME"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="press_enter/play_button" to="." method="_on_play_button_pressed"]
+[node name="online_multiplayer_button" type="Button" parent="GUI/level_0"]
+margin_top = 134.0
+margin_right = 344.0
+margin_bottom = 186.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "ONLINE GAME"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit_button" type="Button" parent="GUI/level_0"]
+visible = false
+margin_top = 162.0
+margin_right = 434.0
+margin_bottom = 214.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "QUIT"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_1" type="VBoxContainer" parent="GUI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 336.0
+margin_top = 180.0
+margin_right = -337.0
+margin_bottom = -102.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="GUI/level_1"]
+margin_top = 61.0
+margin_right = 351.0
+margin_bottom = 88.0
+custom_colors/font_color = Color( 0.458824, 0.458824, 0.458824, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "-ONLINE GAME-"
+align = 1
+
+[node name="new_game_button" type="Button" parent="GUI/level_1"]
+margin_top = 92.0
+margin_right = 351.0
+margin_bottom = 144.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "NEW MATCH"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join_game_button" type="Button" parent="GUI/level_1"]
+margin_top = 148.0
+margin_right = 351.0
+margin_bottom = 200.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "JOIN MATCH"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_button" type="Button" parent="GUI/level_1"]
+margin_top = 204.0
+margin_right = 351.0
+margin_bottom = 256.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
+custom_colors/font_color_pressed = Color( 0.756863, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "< BACK"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="static" type="Node2D" parent="."]
+scale = Vector2( 5, 5 )
+
+[node name="background" type="Sprite" parent="static"]
+material = SubResource( 1 )
+position = Vector2( 0, -4.19397 )
+scale = Vector2( 1.13665, 0.940339 )
+texture = ExtResource( 9 )
+
+[node name="background3" type="Sprite" parent="static"]
+material = SubResource( 2 )
+position = Vector2( 0.843323, 0.978577 )
+scale = Vector2( 0.751, 0.751 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="background4" type="Sprite" parent="static"]
+position = Vector2( 0, -3.17023 )
+scale = Vector2( 0.831059, 0.870687 )
+texture = ExtResource( 10 )
+
+[node name="p0" type="AnimatedSprite" parent="static"]
+material = SubResource( 3 )
+position = Vector2( -55, -0.86 )
+scale = Vector2( 1.6, 1.75 )
+frames = SubResource( 6 )
+animation = "alive"
+
+[node name="w" type="AnimatedSprite" parent="static/p0"]
+position = Vector2( 0.248299, 16.2769 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+
+[node name="Label" type="Label" parent="static/p0/w"]
+margin_left = -34.6606
+margin_top = -34.4407
+margin_right = 37.3394
+margin_bottom = -16.4407
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "JUMP/FLY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="a" type="AnimatedSprite" parent="static/p0"]
+position = Vector2( -5.33245, 20.9628 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+frame = 1
+
+[node name="Label" type="Label" parent="static/p0/a"]
+margin_left = -97.7576
+margin_top = -8.38428
+margin_right = -16.7576
+margin_bottom = 9.61572
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "MOVE LEFT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="d" type="AnimatedSprite" parent="static/p0"]
+position = Vector2( 5.64304, 21.0616 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+frame = 3
+
+[node name="Label" type="Label" parent="static/p0/d"]
+margin_left = 20.7654
+margin_top = -7.85693
+margin_right = 84.7654
+margin_bottom = 8.14307
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "MOVE RIGHT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="s" type="AnimatedSprite" parent="static/p0"]
+position = Vector2( 0.255318, 21.0137 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+frame = 2
+
+[node name="Label" type="Label" parent="static/p0/s"]
+margin_left = -38.3655
+margin_top = 30.2407
+margin_right = 42.6345
+margin_bottom = 48.2407
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "AIM/SHOOT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="static/p0/s"]
+points = PoolVector2Array( -0.80127, 18.5166, -0.80127, 28.6304 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="p1" type="AnimatedSprite" parent="static"]
+material = SubResource( 7 )
+position = Vector2( 55, -0.86 )
+scale = Vector2( 1.6, 1.75 )
+frames = SubResource( 6 )
+animation = "alive"
+flip_h = true
+
+[node name="up" type="AnimatedSprite" parent="static/p1"]
+position = Vector2( -0.00411987, 16.2769 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+frame = 4
+
+[node name="Label" type="Label" parent="static/p1/up"]
+margin_left = -34.6606
+margin_top = -34.4407
+margin_right = 37.3394
+margin_bottom = -16.4407
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "JUMP/FLY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="AnimatedSprite" parent="static/p1"]
+position = Vector2( -5.58487, 20.9628 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+frame = 7
+
+[node name="Label" type="Label" parent="static/p1/left"]
+margin_left = -97.7576
+margin_top = -8.38428
+margin_right = -16.7576
+margin_bottom = 9.61572
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "MOVE LEFT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="AnimatedSprite" parent="static/p1"]
+position = Vector2( 5.39063, 21.0616 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+frame = 6
+
+[node name="Label" type="Label" parent="static/p1/right"]
+margin_left = 20.7654
+margin_top = -7.85693
+margin_right = 84.7654
+margin_bottom = 8.14307
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "MOVE RIGHT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="down" type="AnimatedSprite" parent="static/p1"]
+position = Vector2( 0.00289917, 21.0137 )
+scale = Vector2( 0.15625, 0.142857 )
+frames = ExtResource( 7 )
+animation = "released"
+frame = 5
+
+[node name="Label" type="Label" parent="static/p1/down"]
+margin_left = -38.3655
+margin_top = 30.2407
+margin_right = 42.6345
+margin_bottom = 48.2407
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "AIM/SHOOT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="static/p1/down"]
+points = PoolVector2Array( -0.80127, 18.5166, -0.80127, 28.6304 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="keys" type="Node2D" parent="."]
+scale = Vector2( 5, 5 )
+
+[node name="camera" type="Camera2D" parent="."]
+current = true
+
+[connection signal="pressed" from="GUI/level_0/local_multiplayer_button" to="." method="_on_local_multiplayer_button_pressed"]
+[connection signal="pressed" from="GUI/level_0/online_multiplayer_button" to="." method="_on_online_multiplayer_button_pressed"]
+[connection signal="pressed" from="GUI/level_0/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="GUI/level_1/new_game_button" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="GUI/level_1/join_game_button" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="GUI/level_1/back_button" to="." method="_on_back_button_pressed"]
