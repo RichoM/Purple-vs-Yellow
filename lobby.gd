@@ -24,8 +24,15 @@ func init_event_handling():
 	client.connect("disconnected", self, "_disconnected")
 	client.rtc_mp.connect("peer_connected", self, "_mp_peer_connected")
 
-func start():
-	client.start(Globals.server_url, game_id)
+func start(retry = 0):
+	if Globals.server_url == null:
+		yield(get_tree().create_timer(1.0), "timeout")
+		if retry < 10: 
+			start(retry + 1)
+		else:
+			get_tree().change_scene("res://menu.tscn")
+	else:
+		client.start(Globals.server_url + "/webrtc", game_id)
 	
 func stop():
 	client.stop()
