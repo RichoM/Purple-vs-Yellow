@@ -170,7 +170,8 @@ func _create_peer(id):
 	peer.connect("session_description_created", self, "_offer_created", [id])
 	peer.connect("ice_candidate_created", self, "_new_ice_candidate", [id])
 	rtc_mp.add_peer(peer, id)
-	if id > rtc_mp.get_unique_id():
+	var unique_id = rtc_mp.get_unique_id()
+	if id > unique_id:
 		peer.create_offer()
 	return peer
 
