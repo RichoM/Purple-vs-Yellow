@@ -6,6 +6,7 @@ export var lobby = "" # Will create a new lobby if empty.
 var client: WebSocketClient = WebSocketClient.new()
 var code = 1000
 var reason = "Unknown"
+var config = null
 
 signal lobby_joined(lobby)
 signal connected(id)
@@ -76,7 +77,8 @@ func _parse_msg():
 	var src_id: int = int(src_str)
 
 	if type.begins_with("I: "):
-		emit_signal("connected", src_id)
+		config = JSON.parse(req[1]).result
+		emit_signal("connected", src_id)		
 	elif type.begins_with("N: "):
 		# Client connected
 		emit_signal("peer_connected", src_id)
