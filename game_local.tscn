@@ -293,20 +293,20 @@ position = Vector2( -740.635, 430.996 )
 rotation = -1.57079
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 11 )
-action = "p_left"
+action = "p0_left"
 
 [node name="right_button" type="TouchScreenButton" parent="touch"]
 position = Vector2( -415.756, 281.5 )
 rotation = 1.5708
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 11 )
-action = "p_right"
+action = "p0_right"
 
 [node name="jump_button" type="TouchScreenButton" parent="touch"]
 position = Vector2( 414.103, 277.447 )
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 12 )
-action = "p_up"
+action = "p0_up"
 
 [node name="Label" type="Label" parent="touch/jump_button"]
 margin_right = 100.0
@@ -323,7 +323,7 @@ __meta__ = {
 position = Vector2( 588, 277.447 )
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 12 )
-action = "p_action"
+action = "p0_action"
 
 [node name="Label" type="Label" parent="touch/shoot_button"]
 margin_right = 100.0
