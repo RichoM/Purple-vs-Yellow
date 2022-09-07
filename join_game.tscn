@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://hue.gdshader" type="Shader" id=1]
 [ext_resource path="res://space_background_pack/layers/parallax-space-backgound.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://fonts/icon_font.tres" type="DynamicFont" id=9]
 [ext_resource path="res://error_panel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://spinner.png" type="Texture" id=12]
+[ext_resource path="res://wait_panel.gd" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=8]
 size = 72
@@ -27,6 +29,10 @@ action = "ui_accept"
 
 [sub_resource type="ShortCut" id=5]
 shortcut = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+font_data = ExtResource( 11 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -111,6 +117,47 @@ custom_fonts/font = ExtResource( 9 )
 text = "<"
 flat = true
 align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="wait_panel" type="ColorRect" parent="GUI"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -314.047, -48.2121 )
+color = Color( 0, 0, 0, 0.960784 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="TextureRect" parent="GUI/wait_panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 100, 100 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="msg" type="Label" parent="GUI/wait_panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -345.0
+custom_fonts/font = SubResource( 10 )
+text = "Joining game ????
+Please wait..."
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

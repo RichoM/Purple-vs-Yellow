@@ -4,6 +4,7 @@ onready var lobby = $lobby
 onready var game_id = $GUI/game_id
 onready var join_button = $GUI/join_button
 onready var error_panel = $GUI/error_panel
+onready var wait_panel = $GUI/wait_panel
 
 # HACK(Richo): We can't handle the textchanged event because the 
 # experimental virtual keyboard doesn't support it so instead we
@@ -39,6 +40,8 @@ func join():
 	game_id.editable = false
 	lobby.game_id = id
 	lobby.start()
+	wait_panel.set_game_code(id)
+	wait_panel.visible = true
 	
 	# If, for some reason, the connection cannot be made we wait 15 seconds
 	# before giving up
@@ -51,6 +54,7 @@ func _on_back_button_pressed():
 func _on_lobby_connection_failed(reason):
 	if reason.empty(): reason = "Unknown"
 	error_panel.show_message("CONNECTION FAILED!", "Reason: %s" % reason)
+	wait_panel.visible = false
 
 func _on_error_panel_closed():
 	get_tree().reload_current_scene()
