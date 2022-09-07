@@ -7,6 +7,7 @@ var level = 1
 var player = null
 var server_url = null
 var mode = LOCAL_MULTIPLAYER
+var scores = [0, 0]
 
 func _ready():
 	#server_url = "ws://localhost:3000"
