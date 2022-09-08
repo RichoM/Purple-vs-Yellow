@@ -12,12 +12,37 @@ onready var scores = $GUI/scores
 onready var play_button = $GUI/play_button
 
 func _ready():
+	update_ui()
+		
+func _process(delta):
+	if Globals.mode == Globals.ONLINE_MULTIPLAYER:
+		# Discard old packets
+		client.rtc_mp.poll()
+		while client.rtc_mp.get_available_packet_count() > 0:
+			var packet = client.rtc_mp.get_packet()
+			if packet != null:
+				var msg = packet.get_string_from_utf8()
+				var json = JSON.parse(msg).result
+				# TODO(Richo): Handle score discrepancies!
+				
+		# Send a keep alive packet
+		var data = {"t": Globals.get_timestamp(),
+					"scores": Globals.scores}
+		var msg = JSON.print(data)
+		if client.rtc_mp.put_packet(msg.to_utf8()) != 0:
+			# TODO(Richo): Handle errors
+			print("ERROR!")
+			
+func update_ui():
 	if winner == "p0":
 		p0.play("alive")
 		p1.play("dead")
-	else:
+	elif winner == "p1":
 		p1.play("alive")
 		p0.play("dead")
+	else:
+		p0.play("dead")
+		p1.play("dead")
 
 	scores.text = str(Globals.scores[0]) + " - " + str(Globals.scores[1])
 	
@@ -30,22 +55,8 @@ func _ready():
 
 	if match_over:
 		# Move the scores label down to the center
-		scores.margin_top = get_viewport().size.y/2 - scores.rect_size.y/2
+		scores.margin_top = get_viewport().get_visible_rect().size.y/2 - scores.rect_size.y/2
 		play_button.text = "REMATCH!"
-		
-func _process(delta):
-	if Globals.mode == Globals.ONLINE_MULTIPLAYER:
-		# Discard old packets
-		client.rtc_mp.poll()
-		while client.rtc_mp.get_available_packet_count() > 0:
-			var packet = client.rtc_mp.get_packet()
-		
-		# Send a keep alive packet
-		var data = {"t": Globals.get_timestamp()}
-		var msg = JSON.print(data)
-		if client.rtc_mp.put_packet(msg.to_utf8()) != 0:
-			# TODO(Richo): Handle errors
-			print("ERROR!")
 
 func _on_play_button_pressed():
 	if match_over:

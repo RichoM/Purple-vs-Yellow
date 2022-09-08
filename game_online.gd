@@ -9,6 +9,7 @@ onready var network_unstable = $GUI/network_unstable
 onready var waiting = $GUI/waiting
 
 var game_over = false
+
 var player = null
 var opponent = null
 
@@ -103,7 +104,7 @@ func receive_incoming_messages():
 								t_player, 
 								t_opponent, 
 								t_diff]
-			
+									
 			if json.has("player"):
 				var player_data = json["player"]
 				waiting.visible = false
@@ -173,6 +174,7 @@ func send_outgoing_messages():
 			p.explode()
 			
 	var data = {"t": Globals.get_timestamp(),
+				"scores": Globals.scores,
 				"player": player_data,
 				"projectiles": projectile_data}
 	var msg = JSON.print(data)
@@ -191,8 +193,11 @@ func _on_player1_tree_exited():
 	call_deferred("winner", "p0")
 
 func winner(winner):
-	var winner_idx = 0 if winner == "p0" else 1
-	Globals.scores[winner_idx] = Globals.scores[winner_idx] + 1
+	if player.dead and opponent.dead:
+		winner = null
+	else:
+		var winner_idx = 0 if winner == "p0" else 1
+		Globals.scores[winner_idx] = Globals.scores[winner_idx] + 1
 	
 	var root = get_tree().get_root()
 

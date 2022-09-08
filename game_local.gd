@@ -61,8 +61,11 @@ func _on_player1_tree_exited():
 	call_deferred("winner", "p0")
 
 func winner(winner):
-	var winner_idx = 0 if winner == "p0" else 1
-	Globals.scores[winner_idx] = Globals.scores[winner_idx] + 1
+	if player.dead and opponent.dead:
+		winner = null
+	else:
+		var winner_idx = 0 if winner == "p0" else 1
+		Globals.scores[winner_idx] = Globals.scores[winner_idx] + 1
 	
 	var root = get_tree().get_root()
 

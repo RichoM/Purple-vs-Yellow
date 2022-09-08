@@ -63,14 +63,14 @@ region = Rect2( 16, 64, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "dead",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "alive",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "dead",
 "speed": 5.0
 } ]
 
@@ -86,13 +86,12 @@ script = ExtResource( 4 )
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="play_button" type="Button" parent="GUI"]
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -204.0
+margin_left = 30.0
 margin_top = -153.0
-margin_right = 204.0
+margin_right = -30.0
 margin_bottom = -75.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.623529, 0.701961, 1 )
@@ -183,7 +182,6 @@ position = Vector2( 55, 0 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
 animation = "alive"
-frame = 1
 playing = true
 flip_h = true
 
