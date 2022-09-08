@@ -35,6 +35,7 @@ _global_script_class_icons={
 config/name="Purple vs Yellow"
 run/main_scene="res://menu.tscn"
 config/icon="res://icon/icon.png"
+config/windows_native_icon="res://icon/a7y1c-zkfxq-001.ico"
 
 [autoload]
 
