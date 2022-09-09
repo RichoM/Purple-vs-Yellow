@@ -26,6 +26,7 @@ func _on_server_url_ready(result, response_code, headers, body):
 	print(server_url)
 
 func _process(delta):
+	return # TODO(Richo): Make an options menu that would allow to mute the music!
 	if Input.is_action_just_released("mute"):
 		AudioServer.set_bus_mute(0, not AudioServer.is_bus_mute(0))
 
