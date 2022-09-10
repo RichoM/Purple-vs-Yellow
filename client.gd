@@ -38,7 +38,7 @@ func _create_peer(id):
 	print(id, " - ", peer.get_connection_state())
 	var unique_id = rtc_mp.get_unique_id()
 	print("unique_id:", unique_id)
-	if unique_id == 1: # I'm host
+	if id > unique_id: # Only one of the two peers can create the offer
 		peer.create_offer()
 	return peer
 
